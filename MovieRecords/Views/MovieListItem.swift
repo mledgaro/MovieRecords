@@ -22,10 +22,16 @@ struct MovieListItem: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             
-            Text("Shawshank redemption")
-                .font(.title3)
-                .multilineTextAlignment(.center)
-        
+            VStack(alignment: .leading) {
+                Text("Shawshank redemption")
+                    .font(.title3)
+                    .multilineTextAlignment(.center)
+                Text("1994")
+                    .font(.headline)
+                    .foregroundColor(Color.gray)
+                    .multilineTextAlignment(.leading)
+            }
+            
             Spacer()
             
             Button(action: {

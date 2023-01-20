@@ -16,4 +16,6 @@ struct Movie {
     var imageUrl: String
     var crew: String
     var imdbRating: Float
+    var rating: Int
+    var favorite: Bool
 }
