@@ -13,19 +13,18 @@ struct MovieListItem: View {
     
     var body: some View {
         
-        HStack {
+        HStack(alignment: .center) {
             
-            Spacer()
+            Text("1.")
+                .font(.title)
             
-            Label {
-                Text("Shawshank redemption")
-                    .font(.title2)
-                    .multilineTextAlignment(.center)
-            } icon: {
-                Image("shawshank_poster")
-                    .resizable()
-                    .scaledToFit()
-            }
+            Image("shawshank_poster")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            
+            Text("Shawshank redemption")
+                .font(.title3)
+                .multilineTextAlignment(.center)
         
             Spacer()
             
@@ -37,10 +36,9 @@ struct MovieListItem: View {
                     .scaledToFit()
             }
             .frame(height: 30.0)
-            
-            Spacer()
         }
-        .frame(height: 85.0)
+        .frame(height: 90.0)
+        //.border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
     }
 }
 
