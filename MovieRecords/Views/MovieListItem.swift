@@ -9,24 +9,24 @@ import SwiftUI
 
 struct MovieListItem: View {
     
-    @State var favorite: Bool
+    @Binding var movie: Movie
     
     var body: some View {
         
         HStack(alignment: .center) {
             
-            Text("1.")
+            Text("\(movie.rank).")
                 .font(.title)
             
-            Image("shawshank_poster")
+            Image(movie.imageUrl)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             
             VStack(alignment: .leading) {
-                Text("Shawshank redemption")
+                Text(movie.title)
                     .font(.title3)
                     .multilineTextAlignment(.center)
-                Text("1994")
+                Text(movie.year)
                     .font(.headline)
                     .foregroundColor(Color.gray)
                     .multilineTextAlignment(.leading)
@@ -35,9 +35,9 @@ struct MovieListItem: View {
             Spacer()
             
             Button(action: {
-                favorite.toggle()
+                movie.favorite.toggle()
             }) {
-                Image(systemName: favorite ? "heart.fill" : "heart")
+                Image(systemName: movie.favorite ? "heart.fill" : "heart")
                     .resizable()
                     .scaledToFit()
             }
@@ -50,6 +50,6 @@ struct MovieListItem: View {
 
 struct MovieListItem_Previews: PreviewProvider {
     static var previews: some View {
-        MovieListItem(favorite: true)
+        MovieListItem(movie: .constant(Movie.DUMMY))
     }
 }

@@ -9,8 +9,6 @@ import SwiftUI
 
 struct MoviesList: View {
     
-    var movies = Array(repeating: MovieListItem(favorite: true), count: 10)
-    
     var body: some View {
         
         VStack {
@@ -21,11 +19,16 @@ struct MoviesList: View {
                 .font(.largeTitle)
             
             List {
-                MovieListItem(favorite: false)
-                MovieListItem(favorite: false)
-                MovieListItem(favorite: false)
-                MovieListItem(favorite: false)
-                MovieListItem(favorite: false)
+                MovieListItem(movie: .constant(Movie.DUMMY))
+                MovieListItem(movie: .constant(Movie.DUMMY))
+                MovieListItem(movie: .constant(Movie.DUMMY))
+                MovieListItem(movie: .constant(Movie.DUMMY))
+                MovieListItem(movie: .constant(Movie.DUMMY))
+                MovieListItem(movie: .constant(Movie.DUMMY))
+                MovieListItem(movie: .constant(Movie.DUMMY))
+                MovieListItem(movie: .constant(Movie.DUMMY))
+                MovieListItem(movie: .constant(Movie.DUMMY))
+                MovieListItem(movie: .constant(Movie.DUMMY))
             }
         }
     }
