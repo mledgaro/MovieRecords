@@ -1,9 +1,4 @@
 //
-//  MovieDetails.swift
-//  MovieRecords
-//
-//  Created by MAC on 20/01/23.
-//
 
 import SwiftUI
 
@@ -19,38 +14,47 @@ struct MovieDetails: View {
                 .font(.largeTitle)
             
             Text(movie.year)
-            
-            
+                .font(.title3)
             
             Image(movie.imageUrl)
                 .resizable()
-                .padding(/*@START_MENU_TOKEN@*/.all, 30.0/*@END_MENU_TOKEN@*/)
+                .padding(/*@START_MENU_TOKEN@*/.horizontal, 20.0/*@END_MENU_TOKEN@*/)
+                .padding(.vertical, 5)
                 .scaledToFit()
             
-            
-            
-            Text(movie.crew)
-                .multilineTextAlignment(.center)
-            
             Text(movie.description)
-                .multilineTextAlignment(.leading)
-                .padding(.all, 5.0)
+                .multilineTextAlignment(.center)
+                .padding(.all, 2.0)
             
-            Text("IMDb rating: \(movie.imdbRating)")
+            VStack {
+                Text("Cast & crew:")
+                    .fontWeight(.bold)
+                Text(movie.crew)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.bottom, 2.0)
             
-            Text("Your rating")
             HStack {
-                Image(systemName: "star")
-                Image(systemName: "star")
-                Image(systemName: "star")
-                Image(systemName: "star")
-                Image(systemName: "star")
+                Text("IMDb rating:")
+                    .fontWeight(.bold)
+                Text(String(format: "%.1f", movie.imdbRating))
+            }
+            .padding(.bottom, 2.0)
+            
+            VStack {
+                Text("Your rating")
+                    .fontWeight(.bold)
+                HStack {
+                    Image(systemName: "star")
+                    Image(systemName: "star")
+                    Image(systemName: "star")
+                    Image(systemName: "star")
+                    Image(systemName: "star")
+                }
             }
             
             
-            
         }
-        
     }
 }
 
