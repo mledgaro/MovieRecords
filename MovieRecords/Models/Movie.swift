@@ -16,6 +16,7 @@ struct Movie {
         year: "1994",
         imageUrl: "shawshank_poster",
         crew: "Frank Darabont (dir.), Tim Robbins, Morgan Freeman",
+        description: "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption trough basic compassion.",
         imdbRating: 9.2,
         rating: 9,
         favorite: true)
@@ -26,6 +27,7 @@ struct Movie {
     var year: String
     var imageUrl: String
     var crew: String
+    var description: String
     var imdbRating: Float
     var rating: Int
     var favorite: Bool

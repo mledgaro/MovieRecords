@@ -9,13 +9,15 @@ import SwiftUI
 
 struct MoviesList: View {
     
+    var title: String
+    
     var body: some View {
         
         VStack {
             
             Spacer()
             
-            Text("Top 250")
+            Text(title)
                 .font(.largeTitle)
             
             List {
@@ -36,6 +38,6 @@ struct MoviesList: View {
 
 struct MoviesList_Previews: PreviewProvider {
     static var previews: some View {
-        MoviesList()
+        MoviesList(title: "Top 250")
     }
 }

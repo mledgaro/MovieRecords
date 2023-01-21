@@ -8,31 +8,35 @@
 import SwiftUI
 
 struct MovieDetails: View {
+    
+    var movie: Movie
+    
     var body: some View {
         
         VStack {
-            Text("Shawshank redemption")
+            
+            Text(movie.title)
                 .font(.largeTitle)
             
-            Text("1994")
+            Text(movie.year)
             
             
             
-            Image("shawshank_poster")
+            Image(movie.imageUrl)
                 .resizable()
                 .padding(/*@START_MENU_TOKEN@*/.all, 30.0/*@END_MENU_TOKEN@*/)
                 .scaledToFit()
             
             
             
-            Text("Frank Darabont (dir.), Tim Robbins, Morgan Freeman")
+            Text(movie.crew)
                 .multilineTextAlignment(.center)
             
-            Text("Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption trough basic compassion.")
+            Text(movie.description)
                 .multilineTextAlignment(.leading)
                 .padding(.all, 5.0)
             
-            Text("IMDb rating: 9.2")
+            Text("IMDb rating: \(movie.imdbRating)")
             
             Text("Your rating")
             HStack {
@@ -52,6 +56,6 @@ struct MovieDetails: View {
 
 struct MovieDetails_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetails()
+        MovieDetails(movie: Movie.DUMMY)
     }
 }

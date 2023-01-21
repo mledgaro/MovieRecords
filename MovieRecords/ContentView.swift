@@ -12,12 +12,12 @@ struct ContentView: View {
         
         TabView {
             
-            MoviesList()
+            MoviesList(title: "Top 250")
                 .tabItem {
                     Label("Top 250", systemImage: "square.3.layers.3d")
                 }
             
-            Text("Favorites")
+            MoviesList(title: "Favorites")
                 .tabItem {
                     Label("Favorites", systemImage: "heart.fill")
                 }
