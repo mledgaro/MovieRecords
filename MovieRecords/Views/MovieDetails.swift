@@ -16,13 +16,13 @@ struct MovieDetails: View {
             Text(movie.year)
                 .font(.title3)
             
-            Image(movie.imageUrl)
+            Image(movie.image)
                 .resizable()
                 .padding(/*@START_MENU_TOKEN@*/.horizontal, 20.0/*@END_MENU_TOKEN@*/)
                 .padding(.vertical, 5)
                 .scaledToFit()
             
-            Text(movie.description)
+            Text("plot")
                 .multilineTextAlignment(.center)
                 .padding(.all, 2.0)
             
@@ -37,7 +37,7 @@ struct MovieDetails: View {
             HStack {
                 Text("IMDb rating:")
                     .fontWeight(.bold)
-                Text(String(format: "%.1f", movie.imdbRating))
+                Text(String(format: "%.1f", movie.imDbRating))
             }
             .padding(.bottom, 2.0)
             
@@ -60,6 +60,6 @@ struct MovieDetails: View {
 
 struct MovieDetails_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetails(movie: Movie.DUMMY)
+        MovieDetails(movie: Movie.SHAWSHANK_REDEMPTION)
     }
 }

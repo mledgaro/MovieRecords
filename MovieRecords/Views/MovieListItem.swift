@@ -4,7 +4,10 @@ import SwiftUI
 
 struct MovieListItem: View {
     
-    @Binding var movie: Movie
+    var movie: Movie
+    
+    @State var watched: Bool = false
+    @State var favorite: Bool = false
     
     var body: some View {
         
@@ -13,38 +16,65 @@ struct MovieListItem: View {
             Text("\(movie.rank).")
                 .font(.title)
             
-            Image(movie.imageUrl)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+            AsyncImage(url: URL(string: movie.image)) { image in
+                image.resizable().scaledToFit()
+            } placeholder: {
+                ProgressView()
+            }
             
             VStack(alignment: .leading) {
+                
                 Text(movie.title)
                     .font(.title3)
-                    .multilineTextAlignment(.center)
+                    .fontWeight(.bold)
+                
                 Text(movie.year)
                     .font(.headline)
                     .foregroundColor(Color.gray)
-                    .multilineTextAlignment(.leading)
+                
+                Text(movie.crew)
+                    .font(.footnote)
             }
             
             Spacer()
             
-            Button(action: {
-                movie.favorite.toggle()
-            }) {
-                Image(systemName: movie.favorite ? "heart.fill" : "heart")
-                    .resizable()
-                    .scaledToFit()
+            VStack  {
+                
+                Spacer()
+                
+                Button(action: {
+                    watched.toggle()
+                }) {
+                    Image(systemName: watched ? "eye.fill" : "eye")
+                        .resizable()
+                        .scaledToFit()
+                }
+                .frame(height: 25.0)
+                
+                Spacer()
+                
+                Button(action: {
+                    favorite.toggle()
+                }) {
+                    Image(systemName: favorite ? "heart.fill" : "heart")
+                        .resizable()
+                        .scaledToFit()
+                }
+                .frame(height: 25.0)
+                
+                Spacer()
             }
-            .frame(height: 30.0)
+            
+            
         }
         .frame(height: 90.0)
-        //.border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
     }
 }
 
+
 struct MovieListItem_Previews: PreviewProvider {
+    
     static var previews: some View {
-        MovieListItem(movie: .constant(Movie.DUMMY))
+        MovieListItem(movie: Movie.SHAWSHANK_REDEMPTION)
     }
 }

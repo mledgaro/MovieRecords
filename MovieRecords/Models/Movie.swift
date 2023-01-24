@@ -2,28 +2,26 @@
 
 import Foundation
 
-struct Movie {
+struct Movie: Codable {
     
-    static let DUMMY = Movie(
+    static let SHAWSHANK_REDEMPTION = Movie(
         id: "tt0111161",
-        rank: 1,
+        rank: "1",
         title: "Shawshank redemption",
+        fullTitle: "Shawshank redemption (1994)",
         year: "1994",
-        imageUrl: "shawshank_poster",
+        image: "shawshank_poster",
         crew: "Frank Darabont (dir.), Tim Robbins, Morgan Freeman",
-        description: "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption trough basic compassion.",
-        imdbRating: 9.2,
-        rating: 9,
-        favorite: true)
+        imDbRating: "9.2",
+        imDbRatingCount: "2689519")
     
     var id: String
-    var rank: Int
+    var rank: String
     var title: String
+    var fullTitle: String
     var year: String
-    var imageUrl: String
+    var image: String
     var crew: String
-    var description: String
-    var imdbRating: Float
-    var rating: Int
-    var favorite: Bool
+    var imDbRating: String
+    var imDbRatingCount: String
 }
