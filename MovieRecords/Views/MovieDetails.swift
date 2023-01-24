@@ -16,11 +16,17 @@ struct MovieDetails: View {
             Text(movie.year)
                 .font(.title3)
             
-            Image(movie.image)
-                .resizable()
-                .padding(/*@START_MENU_TOKEN@*/.horizontal, 20.0/*@END_MENU_TOKEN@*/)
-                .padding(.vertical, 5)
-                .scaledToFit()
+//            Image(movie.image)
+//                .resizable()
+//                .padding(/*@START_MENU_TOKEN@*/.horizontal, 20.0/*@END_MENU_TOKEN@*/)
+//                .padding(.vertical, 5)
+//                .scaledToFit()
+            
+            AsyncImage(url: movie.imageUrl) { image in
+                image.resizable().scaledToFit()
+            } placeholder: {
+                ProgressView()
+            }
             
             Text("plot")
                 .multilineTextAlignment(.center)
@@ -37,7 +43,7 @@ struct MovieDetails: View {
             HStack {
                 Text("IMDb rating:")
                     .fontWeight(.bold)
-                Text(String(format: "%.1f", movie.imDbRating))
+                Text(String(format: "%.1f", movie.rating))
             }
             .padding(.bottom, 2.0)
             

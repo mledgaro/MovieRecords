@@ -3,12 +3,12 @@
 import Foundation
 import Alamofire
 
+
 struct APIResponseArray: Codable {
     
     var items: [Movie]
     var errorMessage: String
 }
-
 
 
 class IMDbAPI: ObservableObject {
@@ -46,9 +46,17 @@ class IMDbAPI: ObservableObject {
         
         let url = "\(IMDbAPI.baseUrl)Top250Movies/\(IMDbAPI.apiKey)"
         
+        print("api request made: \(url)")
+        
         AF.request(url).responseDecodable(of: APIResponseArray.self) { response in
 
+//            debugPrint(response)
+            
             self.movies = response.value?.items ?? []
+            
+//            debugPrint(self.movies[...10])
+            
+            // save response as cached file
             let data = try! JSONEncoder().encode(self.movies)
             try! data.write(to: self.topFile)
         }

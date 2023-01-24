@@ -16,7 +16,7 @@ struct MovieListItem: View {
             Text("\(movie.rank).")
                 .font(.title)
             
-            AsyncImage(url: URL(string: movie.image)) { image in
+            AsyncImage(url: movie.imageUrl) { image in
                 image.resizable().scaledToFit()
             } placeholder: {
                 ProgressView()
@@ -44,23 +44,25 @@ struct MovieListItem: View {
                 
                 Button(action: {
                     watched.toggle()
+                    print("\(movie.title) was marked as watched")
                 }) {
                     Image(systemName: watched ? "eye.fill" : "eye")
                         .resizable()
                         .scaledToFit()
                 }
-                .frame(height: 25.0)
+                .frame(height: 20.0)
                 
                 Spacer()
                 
                 Button(action: {
                     favorite.toggle()
+                    print("\(movie.title) was marked as favorite")
                 }) {
                     Image(systemName: favorite ? "heart.fill" : "heart")
                         .resizable()
                         .scaledToFit()
                 }
-                .frame(height: 25.0)
+                .frame(height: 20.0)
                 
                 Spacer()
             }
