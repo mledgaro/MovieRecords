@@ -4,23 +4,18 @@ import SwiftUI
 
 struct MovieDetails: View {
     
-    var movie: Movie
+    var movie: MovieDetailed
     
     var body: some View {
         
         VStack {
             
             Text(movie.title)
-                .font(.largeTitle)
+                .font(.title)
+                .multilineTextAlignment(.center)
             
             Text(movie.year)
                 .font(.title3)
-            
-//            Image(movie.image)
-//                .resizable()
-//                .padding(/*@START_MENU_TOKEN@*/.horizontal, 20.0/*@END_MENU_TOKEN@*/)
-//                .padding(.vertical, 5)
-//                .scaledToFit()
             
             AsyncImage(url: movie.imageUrl) { image in
                 image.resizable().scaledToFit()
@@ -28,36 +23,34 @@ struct MovieDetails: View {
                 ProgressView()
             }
             
-            Text("plot")
-                .multilineTextAlignment(.center)
+            Text(movie.plot)
+                .multilineTextAlignment(.leading)
                 .padding(.all, 2.0)
             
-            VStack {
-                Text("Cast & crew:")
-                    .fontWeight(.bold)
-                Text(movie.crew)
-                    .multilineTextAlignment(.center)
+            VStack(alignment: .leading) {
+                
+                HInfoLabel(label: "Directed by", content: movie.directors)
+                HInfoLabel(label: "Written by", content: movie.writers)
+                HInfoLabel(label: "Stars", content: movie.stars)
+                HInfoLabel(label: "IMDb rating", content: movie.rating)
+                HInfoLabel(label: "Duration", content: movie.runtime)
+                HInfoLabel(label: "Genre(s)", content: movie.genres)
+                HInfoLabel(label: "Country", content: movie.countries)
+                HInfoLabel(label: "Language", content: movie.languages)
             }
-            .padding(.bottom, 2.0)
             
-            HStack {
-                Text("IMDb rating:")
-                    .fontWeight(.bold)
-                Text(String(format: "%.1f", movie.rating))
-            }
-            .padding(.bottom, 2.0)
             
-            VStack {
-                Text("Your rating")
-                    .fontWeight(.bold)
-                HStack {
-                    Image(systemName: "star")
-                    Image(systemName: "star")
-                    Image(systemName: "star")
-                    Image(systemName: "star")
-                    Image(systemName: "star")
-                }
-            }
+//            VStack {
+//                Text("Your rating")
+//                    .fontWeight(.bold)
+//                HStack {
+//                    Image(systemName: "star")
+//                    Image(systemName: "star")
+//                    Image(systemName: "star")
+//                    Image(systemName: "star")
+//                    Image(systemName: "star")
+//                }
+//            }
             
             
         }
@@ -66,6 +59,6 @@ struct MovieDetails: View {
 
 struct MovieDetails_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetails(movie: Movie.SHAWSHANK_REDEMPTION)
+        MovieDetails(movie: MovieDetailed.SHAWSHANK_REDEMPTION)
     }
 }

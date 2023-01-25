@@ -4,7 +4,7 @@ import SwiftUI
 
 struct MovieListItem: View {
     
-    var movie: Movie
+    var movie: MovieBasic
     
     @State var watched: Bool = false
     @State var favorite: Bool = false
@@ -50,7 +50,7 @@ struct MovieListItem: View {
                         .resizable()
                         .scaledToFit()
                 }
-                .frame(height: 20.0)
+                .frame(width: 20.0, height: 20.0)
                 
                 Spacer()
                 
@@ -62,7 +62,7 @@ struct MovieListItem: View {
                         .resizable()
                         .scaledToFit()
                 }
-                .frame(height: 20.0)
+                .frame(width: 20.0, height: 20.0)
                 
                 Spacer()
             }
@@ -70,6 +70,9 @@ struct MovieListItem: View {
             
         }
         .frame(height: 90.0)
+        .onTapGesture {
+            print(movie.title)
+        }
     }
 }
 
@@ -77,6 +80,6 @@ struct MovieListItem: View {
 struct MovieListItem_Previews: PreviewProvider {
     
     static var previews: some View {
-        MovieListItem(movie: Movie.SHAWSHANK_REDEMPTION)
+        MovieListItem(movie: MovieBasic.SHAWSHANK_REDEMPTION)
     }
 }

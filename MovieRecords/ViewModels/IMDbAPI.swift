@@ -6,7 +6,7 @@ import Alamofire
 
 struct APIResponseArray: Codable {
     
-    var items: [Movie]
+    var items: [MovieBasic]
     var errorMessage: String
 }
 
@@ -24,7 +24,7 @@ class IMDbAPI: ObservableObject {
         cachesDir.appendingPathComponent("top").appendingPathExtension(for: .json)
     }
     
-    @Published var movies: [Movie]
+    @Published var movies: [MovieBasic]
     
     
     init() {
@@ -34,7 +34,7 @@ class IMDbAPI: ObservableObject {
         if FileManager.default.fileExists(atPath: String(topFile.path)) {
             
             let topData = try! Data(contentsOf: topFile)
-            self.movies = try! JSONDecoder().decode([Movie].self, from: topData)
+            self.movies = try! JSONDecoder().decode([MovieBasic].self, from: topData)
             
         } else {
             self.top250()
@@ -62,10 +62,24 @@ class IMDbAPI: ObservableObject {
         }
     }
     
-//    static func movieDetails(imdbId: String) async throws {
-//
-//        let [url = "\(IMDbAPI.baseUrl)Title/\(IMDbAPI.apiKey)/\(imdbId)/FullActor,FullCast,Trailer,"
-//
-//    }
+    func movieDetails(imdbId: String) {
+
+        let url = "\(IMDbAPI.baseUrl)Title/\(IMDbAPI.apiKey)/\(imdbId)"
+
+        print("api request made: \(url)")
+        
+        AF.request(url).responseDecodable(of: APIResponseArray.self) { response in
+
+//            debugPrint(response)
+            
+//            self.movies[index].details = response.value?.items ?? []
+            
+//            debugPrint(self.movies[...10])
+            
+            // save response as cached file
+            let data = try! JSONEncoder().encode(self.movies)
+            try! data.write(to: self.topFile)
+        }
+    }
     
 }

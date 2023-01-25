@@ -2,9 +2,9 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct MovieBasic: Codable {
     
-    static let SHAWSHANK_REDEMPTION = Movie(
+    static let SHAWSHANK_REDEMPTION = MovieBasic(
         id: "tt0111161",
         rank: 1,
         title: "Shawshank redemption",
@@ -42,6 +42,9 @@ struct Movie: Codable {
     var crew: String
     var rating: Float
     
+//    var favorite: Bool
+//    var watched: Bool
+    
     
     init(from decoder: Decoder) throws {
 
@@ -59,6 +62,7 @@ struct Movie: Codable {
     func encode(to encoder: Encoder) throws {
         
         var container = encoder.container(keyedBy: CodingKeys.self)
+        
         try container.encode(self.id, forKey: .id)
         try container.encode(String(self.rank), forKey: .rank)
         try container.encode(self.title, forKey: .title)
@@ -78,4 +82,6 @@ struct Movie: Codable {
         self.crew = crew
         self.rating = rating
     }
+    
+    
 }

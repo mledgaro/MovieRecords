@@ -5,7 +5,7 @@ import SwiftUI
 struct MoviesList: View {
     
     var title: String
-    var movies: [Movie]
+    var movies: [MovieBasic]
     
     var body: some View {
         
@@ -25,6 +25,6 @@ struct MoviesList: View {
 struct MoviesList_Previews: PreviewProvider {
     
     static var previews: some View {
-        MoviesList(title: "Top 250", movies: Array(repeating: Movie.SHAWSHANK_REDEMPTION, count: 5))
+        MoviesList(title: "Top 250", movies: Array(repeating: MovieBasic.SHAWSHANK_REDEMPTION, count: 5))
     }
 }
