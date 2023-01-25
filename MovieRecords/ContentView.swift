@@ -4,14 +4,14 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var imdbApi = IMDbAPI()
+    @StateObject private var topMoviesVM = TopMoviesVM()
     
     
     var body: some View {
         
         TabView {
             
-            MoviesList(title: "Top 250", movies: imdbApi.movies)
+            MoviesList(title: "Top 250", movies: topMoviesVM.movies)
                 .tabItem {
                     Label("Top 250", systemImage: "square.3.layers.3d")
                 }

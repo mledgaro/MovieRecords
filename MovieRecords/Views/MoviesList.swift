@@ -14,8 +14,11 @@ struct MoviesList: View {
             Text(title)
                 .font(.largeTitle)
             
-            List(movies, id: \.id) { movie in
-                MovieListItem(movie: movie)
+            NavigationView {
+                
+                List(movies, id: \.id) { movie in
+                    MovieListItem(movie: movie)
+                }
             }
             
         }

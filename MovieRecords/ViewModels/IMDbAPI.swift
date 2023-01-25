@@ -1,85 +1,38 @@
 //
 
 import Foundation
-import Alamofire
 
-
-struct APIResponseArray: Codable {
-    
-    var items: [MovieBasic]
-    var errorMessage: String
-}
-
-
-class IMDbAPI: ObservableObject {
+class IMDbAPI {
     
     private static let baseUrl = "https://imdb-api.com/en/API/"
     private static let apiKey = "k_alt156cp"
     
-    private var cachesDir: URL {
+    
+    private static var cachesDir: URL {
         try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     }
     
-    private var topFile: URL {
-        cachesDir.appendingPathComponent("top").appendingPathExtension(for: .json)
+    static var topMoviesFile: URL {
+        IMDbAPI.cachesDir.appendingPathComponent("top").appendingPathExtension(for: .json)
     }
     
-    @Published var movies: [MovieBasic]
-    
-    
-    init() {
-        
-        self.movies = []
-        
-        if FileManager.default.fileExists(atPath: String(topFile.path)) {
-            
-            let topData = try! Data(contentsOf: topFile)
-            self.movies = try! JSONDecoder().decode([MovieBasic].self, from: topData)
-            
-        } else {
-            self.top250()
-        }
-        
+    static var topMoviesRequest: String {
+        "\(IMDbAPI.baseUrl)Top250Movies/\(IMDbAPI.apiKey)"
     }
     
-    func top250() {
-        
-        let url = "\(IMDbAPI.baseUrl)Top250Movies/\(IMDbAPI.apiKey)"
-        
-        print("api request made: \(url)")
-        
-        AF.request(url).responseDecodable(of: APIResponseArray.self) { response in
-
-//            debugPrint(response)
-            
-            self.movies = response.value?.items ?? []
-            
-//            debugPrint(self.movies[...10])
-            
-            // save response as cached file
-            let data = try! JSONEncoder().encode(self.movies)
-            try! data.write(to: self.topFile)
-        }
+    
+    static func movieDetailsFile(imdbId: String) -> URL {
+        return IMDbAPI.cachesDir.appendingPathComponent(imdbId).appendingPathExtension(for: .json)
     }
     
-    func movieDetails(imdbId: String) {
-
-        let url = "\(IMDbAPI.baseUrl)Title/\(IMDbAPI.apiKey)/\(imdbId)"
-
-        print("api request made: \(url)")
+    static func movieDetailsRequest(imdbId: String) -> String {
+        return "\(IMDbAPI.baseUrl)Title/\(IMDbAPI.apiKey)/\(imdbId)"
+    }
+    
+    static func saveFile(obj: Codable, file: URL) {
         
-        AF.request(url).responseDecodable(of: APIResponseArray.self) { response in
-
-//            debugPrint(response)
-            
-//            self.movies[index].details = response.value?.items ?? []
-            
-//            debugPrint(self.movies[...10])
-            
-            // save response as cached file
-            let data = try! JSONEncoder().encode(self.movies)
-            try! data.write(to: self.topFile)
-        }
+        let data = try! JSONEncoder().encode(obj)
+        try! data.write(to: file)
     }
     
 }
