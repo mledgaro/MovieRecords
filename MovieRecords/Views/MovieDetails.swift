@@ -5,10 +5,7 @@ import SwiftUI
 struct MovieDetails: View {
     
     
-    var imdbId: String
-    
-    
-    @StateObject private var movieDetailedVM = MovieDetailedVM()
+    @ObservedObject var movieDetailedVM: MovieDetailedVM
     
     
     private var movie: MovieDetailed {
@@ -16,15 +13,16 @@ struct MovieDetails: View {
     }
     
     
-    init(imdbId: String) {
+    init(_ movieDetVM: MovieDetailedVM) {
         
-        self.imdbId = imdbId
+        self.movieDetailedVM = movieDetVM
     }
     
     
     var body: some View {
         
         ScrollView {
+            
             VStack {
                 
                 Text(movie.title)
@@ -42,7 +40,7 @@ struct MovieDetails: View {
                 
                 Text(movie.plot)
                     .multilineTextAlignment(.leading)
-                    .padding(.all, 2.0)
+                    .padding(.all, 8.0)
                 
                 VStack(alignment: .leading) {
                     
@@ -71,9 +69,6 @@ struct MovieDetails: View {
                 
                 
             } // VStack
-            .onAppear {
-                self.movieDetailedVM.loadData(imdbId: imdbId)
-            }
             
         } // ScrollView
         
@@ -86,6 +81,6 @@ struct MovieDetails_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        MovieDetails(imdbId: "tt0111161")
+        MovieDetails(MovieDetailedVM("tt0111161"))
     }
 }

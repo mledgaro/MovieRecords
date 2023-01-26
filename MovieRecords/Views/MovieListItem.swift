@@ -13,7 +13,9 @@ struct MovieListItem: View {
         
         VStack {
             
-            NavigationLink(destination: MovieDetails(imdbId: movie.id)) {
+//            NavigationLink(destination: MovieDetails(imdbId: movie.id)) {
+                
+            NavigationLink(destination: MovieDetails(MovieDetailedVM(movie.id))) {
                 
                 VStack(alignment: .leading, spacing: 5.0) {
                     
