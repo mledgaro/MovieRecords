@@ -32,6 +32,9 @@ struct ContentView: View {
                 }
             
         }
+        .onDisappear {
+            print("DISAPPEAR EVENT")
+        }
     }
 }
 
