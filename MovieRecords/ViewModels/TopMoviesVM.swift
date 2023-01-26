@@ -6,7 +6,7 @@ import Alamofire
 class TopMoviesVM: ObservableObject {
     
     
-    struct APIResponseArray: Codable {
+    private struct APIResponseArray: Codable {
         var items: [MovieBasic]
         var errorMessage: String
     }
@@ -15,32 +15,26 @@ class TopMoviesVM: ObservableObject {
     @Published var movies: [MovieBasic]
     
     
-    private var file: URL
-    
-    
     init() {
         
         self.movies = []
         
-        self.file = IMDbAPI.topMoviesFile
-        
-        debugPrint(self.file)
-        
-        if FileManager.default.fileExists(atPath: String(self.file.path)) {
-            
-            let data = try! Data(contentsOf: self.file)
-            self.movies = try! JSONDecoder().decode([MovieBasic].self, from: data)
-            
-        } else {
-            self.requestData()
-        }
-        
+        loadData()
     }
     
     
+    private func loadData() {
+        
+        if let data = try! FileManagerVM.loadTopMoviesFile() {
+            movies = data
+        } else {
+            requestData()
+        }
+    }
+    
     private func requestData() {
         
-        AF.request(IMDbAPI.topMoviesRequest).responseDecodable(of: APIResponseArray.self) { response in
+        AF.request(IMDbAPI.topMoviesURLReq).responseDecodable(of: APIResponseArray.self) { response in
             
             //            debugPrint(response)
             
@@ -48,7 +42,7 @@ class TopMoviesVM: ObservableObject {
             
             //            debugPrint(self.movies[...10])
             
-            IMDbAPI.saveFile(obj: self.movies, file: self.file)
+            FileManagerVM.saveTopMoviesFile(self.movies)
         }
     }
     

@@ -6,43 +6,36 @@ import Alamofire
 class MovieDetailedVM: ObservableObject {
     
     
+    var id: String
+    
     @Published var movie: MovieDetailed
     
     
-    init() {
+    init(_ id: String) {
         
         self.movie = MovieDetailed.SHAWSHANK_REDEMPTION
+        self.id = id
+        
+        loadData()
     }
     
     
-    private func requestData(imdbId: String) {
+    private func loadData() {
         
-        let file = IMDbAPI.movieDetailsFile(imdbId: imdbId)
-        
-        AF.request(IMDbAPI.movieDetailsRequest(imdbId: imdbId)).responseDecodable(of: MovieDetailed.self) { response in
-            
-//            debugPrint(response)
-            
-            self.movie = response.value ?? MovieDetailed.SHAWSHANK_REDEMPTION
-            
-//            debugPrint(self.movies[...10])
-            
-            IMDbAPI.saveFile(obj: self.movie, file: file)
+        if let data = try! FileManagerVM.loadMovieDetailsFile(self.id) {
+            movie = data
+        } else {
+            requestData()
         }
     }
     
-    
-    func loadData(imdbId: String) {
+    private func requestData() {
         
-        let file = IMDbAPI.movieDetailsFile(imdbId: imdbId)
-        
-        if FileManager.default.fileExists(atPath: String(file.path)) {
+        AF.request(IMDbAPI.movieDetailsURLReq(self.id)).responseDecodable(of: MovieDetailed.self) { response in
             
-            let data = try! Data(contentsOf: file)
-            self.movie = try! JSONDecoder().decode(MovieDetailed.self, from: data)
+            self.movie = response.value ?? MovieDetailed.SHAWSHANK_REDEMPTION
             
-        } else {
-            requestData(imdbId: imdbId)
+            FileManagerVM.saveMovieDetailsFile(self.id, self.movie)
         }
     }
     

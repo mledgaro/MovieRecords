@@ -2,6 +2,15 @@
 
 import Foundation
 
+
+private struct MovieCategories {
+    
+    var id: String
+    var favorite: Bool
+    var watched: Bool
+}
+
+
 struct MovieBasic: Codable {
     
     static let SHAWSHANK_REDEMPTION = MovieBasic(
@@ -25,6 +34,11 @@ struct MovieBasic: Codable {
         case rating = "imDbRating"
     }
     
+//    enum MovieBasicCK: String, CodingKey {
+//
+//        case id, rank, title, year, imageUrl, crew, rating, favorite, watched
+//    }
+    
     /*
      api response
      {
@@ -42,8 +56,8 @@ struct MovieBasic: Codable {
     var crew: String
     var rating: Float
     
-//    var favorite: Bool
-//    var watched: Bool
+    var favorite: Bool
+    var watched: Bool
     
     
     init(from decoder: Decoder) throws {
@@ -57,6 +71,9 @@ struct MovieBasic: Codable {
         self.imageUrl = try URL(string: container.decode(String.self, forKey: .imageUrl))
         self.crew = try container.decode(String.self, forKey: .crew)
         self.rating = try Float(container.decode(String.self, forKey: .rating)) ?? 0.0
+        
+        self.favorite = false
+        self.watched = false
     }
     
     func encode(to encoder: Encoder) throws {
@@ -81,6 +98,9 @@ struct MovieBasic: Codable {
         self.imageUrl = URL(string: imageUrl)
         self.crew = crew
         self.rating = rating
+        
+        self.favorite = false
+        self.watched = false
     }
     
     
