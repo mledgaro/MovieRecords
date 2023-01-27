@@ -28,9 +28,11 @@ struct MovieListItem: View {
                         Text("\(movie.rank).")
                             .font(.title3)
                             .fontWeight(.black)
+                            .foregroundColor(Color.white)
                         
                         Text(movie.title)
                             .font(.title3)
+                            .foregroundColor(Color.white)
                         
                     } // HStack
                     
@@ -74,5 +76,6 @@ struct MovieListItem_Previews: PreviewProvider {
     
     static var previews: some View {
         MovieListItem(index: 0)
+            .environmentObject(TopMoviesVM())
     }
 }

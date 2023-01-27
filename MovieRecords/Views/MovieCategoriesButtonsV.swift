@@ -58,5 +58,6 @@ struct MovieCategoriesButtonsV: View {
 struct MovieCategoriesButtonsV_Previews: PreviewProvider {
     static var previews: some View {
         MovieCategoriesButtonsV(index: 0)
+            .environmentObject(TopMoviesVM())
     }
 }
