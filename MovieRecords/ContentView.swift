@@ -28,7 +28,7 @@ struct ContentView: View {
                     Label("Watched", systemImage: "eye")
                 }
             
-            Text("Settings")
+            Settings()
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
