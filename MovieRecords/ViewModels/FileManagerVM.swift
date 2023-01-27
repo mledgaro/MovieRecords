@@ -16,21 +16,6 @@ class FileManagerVM {
         try! FileManager.default.url(for: .applicationDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     }
     
-    private static var topMoviesFile: URL {
-        
-        cachesDir.appendingPathComponent("top").appendingPathExtension(for: .json)
-    }
-    
-    private static var movieCategoriesFile: URL {
-        
-        appDir.appendingPathComponent("movieCategories").appendingPathExtension(for: .json)
-    }
-    
-    
-    private static func movieDetailsFile(_ id: String) -> URL {
-        
-        return cachesDir.appendingPathComponent(id).appendingPathExtension(for: .json)
-    }
     
     private static func fileExists(_ file: URL) -> Bool {
         
@@ -39,64 +24,88 @@ class FileManagerVM {
     
     private static func loadFile<T: Decodable>(_ file: URL) throws -> T? {
         
-        if fileExists(file) {
+        guard fileExists(file) else {
+            return nil
+        }
+        
+        let data = try! Data(contentsOf: file)
+        return try JSONDecoder().decode(T.self, from: data)
+    }
+    
+    private static func saveFile(data: Codable, file: URL) {
+        
+        let encodedData = try! JSONEncoder().encode(data)
+        try! encodedData.write(to: file)
+    }
+    
+    
+    class TopMoviesFM {
+        
+        static var file: URL {
+            cachesDir.appendingPathComponent("topMovies").appendingPathExtension(for: .json)
+        }
+        
+        static func loadData() throws -> [MovieBasic]? {
             
-            let data = try! Data(contentsOf: file)
-            return try JSONDecoder().decode(T.self, from: data)
+            return try loadFile(file)
         }
         
-        return nil
+        static func saveData(_ data: [MovieBasic]) {
+            
+            saveFile(data: data, file: file)
+        }
     }
     
-    private static func saveFile(obj: Codable, file: URL) {
+    class MovieDetailsFM {
         
-        let data = try! JSONEncoder().encode(obj)
-        try! data.write(to: file)
-    }
-    
-    
-    static func loadTopMoviesFile() throws -> [MovieBasic]? {
-        
-        return try loadFile(topMoviesFile)
-    }
-    
-    static func loadMovieDetailsFile(_ id: String) throws -> MovieDetailed? {
-        
-        return try loadFile(movieDetailsFile(id))
-    }
-    
-    static func loadMovieCategoriesFile() throws -> [String : MovieCategories] {
-        
-        let data: [MovieCategories] = try loadFile(movieCategoriesFile) ?? []
-        
-        var dict: [String : MovieCategories] = [:]
-        
-        for item in data {
-            dict[item.id] = item
+        static func file(_ id: String) -> URL {
+            
+            return cachesDir.appendingPathComponent(id).appendingPathExtension(for: .json)
         }
         
-        return dict
-    }
-    
-    static func saveTopMoviesFile(_ data: [MovieBasic]) {
-        
-        saveFile(obj: data, file: topMoviesFile)
-    }
-    
-    static func saveMovieDetailsFile(_ id: String, _ data: MovieDetailed) {
-        
-        saveFile(obj: data, file: movieDetailsFile(id))
-    }
-    
-    static func saveMovieCategoriesFile(_ data: [MovieBasic]) {
-        
-        var movieCatsArr: [MovieCategories] = []
-        
-        for movie in data {
-            movieCatsArr.append(MovieCategories(id: movie.id, favorite: movie.favorite, watched: movie.watched))
+        static func loadData(_ id: String) throws -> MovieDetailed? {
+            
+            return try loadFile(file(id))
         }
         
-        saveFile(obj: movieCatsArr, file: movieCategoriesFile)
+        static func saveData(_ id: String, _ data: MovieDetailed) {
+            
+            saveFile(data: data, file: file(id))
+        }
     }
     
+    class MoviesUserDataFM {
+        
+        static var file: URL {
+            
+            appDir.appendingPathComponent("moviesUserData").appendingPathExtension(for: .json)
+        }
+        
+        static func loadData() throws -> [String : MovieUserData]? {
+            
+            guard let arr: [MovieUserData] = try loadFile(file) else {
+                return nil
+            }
+            
+            var dict = [String : MovieUserData]()
+            
+            for item in arr {
+                dict[item.id] = item
+            }
+            
+            return dict
+        }
+        
+        static func saveData(_ data: [MovieBasic]) {
+            
+            var arr = [MovieUserData]()
+            
+            for movie in data {
+                arr.append(MovieUserData(id: movie.id, favorite: movie.favorite, watched: movie.watched))
+            }
+            
+            saveFile(data: arr, file: file)
+        }
+    }
+
 }

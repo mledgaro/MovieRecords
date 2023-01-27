@@ -20,6 +20,21 @@ struct MovieDetailed: Codable {
         rating: "9.3",
         languages: "English")
     
+    static let DUMMY = MovieDetailed(
+        id: "",
+        title: "<TITLE>",
+        year: "<YEAR>",
+        imageUrl: "",
+        runtime: "<RUNTIME>",
+        plot: "<PLOT>",
+        directors: "<DIRECTORS>",
+        writers: "<WRITERS>",
+        stars: "<STARS>",
+        genres: "<GENRES>",
+        countries: "<COUNTRIES>",
+        rating: "<RATING>",
+        languages: "<LANGUAGES>")
+    
     
     enum CodingKeys: String, CodingKey {
         

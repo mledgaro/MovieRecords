@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct MovieCategories: Codable {
+struct MovieUserData: Codable {
     
     var id: String
     var favorite: Bool

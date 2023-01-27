@@ -6,15 +6,19 @@ import SwiftUI
 struct MovieListItem: View {
     
     
-    @Binding var movie: MovieBasic
+    @EnvironmentObject var topMoviesVM: TopMoviesVM
+    
+    var index: Int
+    
+    private var movie: MovieBasic {
+        topMoviesVM.movies[index]
+    }
     
     
     var body: some View {
         
         VStack {
             
-//            NavigationLink(destination: MovieDetails(imdbId: movie.id)) {
-                
             NavigationLink(destination: MovieDetails(MovieDetailedVM(movie.id))) {
                 
                 VStack(alignment: .leading, spacing: 5.0) {
@@ -57,7 +61,7 @@ struct MovieListItem: View {
                 
             } // NavigationLink(destination: MovieDetails(imdbId: movie.id))
             
-            MovieCategoriesButtonsV(favorite: $movie.favorite, watched: $movie.watched)
+            MovieCategoriesButtonsV(index: index)
             
         } // VStack
             
@@ -69,6 +73,6 @@ struct MovieListItem: View {
 struct MovieListItem_Previews: PreviewProvider {
     
     static var previews: some View {
-        MovieListItem(movie: .constant(MovieBasic.SHAWSHANK_REDEMPTION))
+        MovieListItem(index: 0)
     }
 }

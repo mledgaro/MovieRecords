@@ -4,7 +4,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject private var topMoviesVM = TopMoviesVM()
+    @StateObject var topMoviesVM = TopMoviesVM()
     
     @Environment(\.scenePhase) private var scenePhase
     
@@ -13,17 +13,17 @@ struct ContentView: View {
         
         TabView {
             
-            MoviesList(title: "Top 250", movies: $topMoviesVM.movies)
+            MoviesList(title: "Top 250", filter: .all)
                 .tabItem {
                     Label("Top 250", systemImage: "square.3.layers.3d")
                 }
             
-            Text("Favorites")
+            MoviesList(title: "Favorites", filter: .favorites)
                 .tabItem {
                     Label("Favorites", systemImage: "heart.fill")
                 }
             
-            Text("Watched")
+            MoviesList(title: "Watched", filter: .watched)
                 .tabItem {
                     Label("Watched", systemImage: "eye")
                 }
@@ -36,9 +36,11 @@ struct ContentView: View {
         }
         .onChange(of: scenePhase) { phase in
             if phase == .inactive {
-                FileManagerVM.saveMovieCategoriesFile(topMoviesVM.movies)
+                FileManagerVM.MoviesUserDataFM.saveData(topMoviesVM.movies)
+                print("USER DATA SAVED")
             }
         }
+        .environmentObject(topMoviesVM)
     }
 }
 

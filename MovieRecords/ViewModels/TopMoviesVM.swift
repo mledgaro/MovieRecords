@@ -3,6 +3,12 @@
 import Foundation
 import Alamofire
 
+
+enum MoviesFilter {
+    case all, favorites, watched
+}
+
+
 class TopMoviesVM: ObservableObject {
     
     
@@ -14,13 +20,10 @@ class TopMoviesVM: ObservableObject {
     
     @Published var movies: [MovieBasic]
     
-    private var movieCategories: [String : MovieCategories]
-    
     
     init() {
         
         self.movies = []
-        self.movieCategories = [:]
         
         loadData()
     }
@@ -28,23 +31,29 @@ class TopMoviesVM: ObservableObject {
     
     private func loadData() {
         
-        if let data = try! FileManagerVM.loadTopMoviesFile() {
-            movies = data
-            loadMovieCategories()
-        } else {
+        guard let data = try! FileManagerVM.TopMoviesFM.loadData() else {
             requestData()
+            return
         }
+        
+        movies = data
+        loadMoviesUserData()
     }
     
-    private func loadMovieCategories() {
+    private func loadMoviesUserData() {
         
-        movieCategories = try! FileManagerVM.loadMovieCategoriesFile()
+        guard let moviesUserData = try! FileManagerVM.MoviesUserDataFM.loadData() else {
+            return
+        }
         
         for i in 0..<movies.count {
-            if let movieCat = movieCategories[movies[i].id] {
-                movies[i].favorite = movieCat.favorite
-                movies[i].watched = movieCat.watched
+            
+            guard let mud = moviesUserData[movies[i].id] else {
+                continue
             }
+            
+            movies[i].favorite = mud.favorite
+            movies[i].watched = mud.watched
         }
     }
     
@@ -52,15 +61,12 @@ class TopMoviesVM: ObservableObject {
         
         AF.request(IMDbAPI.topMoviesURLReq).responseDecodable(of: APIResponseArray.self) { response in
             
-            //            debugPrint(response)
-            
-            self.movies = response.value?.items ?? []
-            
-            self.loadMovieCategories()
-            
-            //            debugPrint(self.movies[...10])
-            
-            FileManagerVM.saveTopMoviesFile(self.movies)
+            if let dataResp = response.value {
+                
+                self.movies = dataResp.items
+                self.loadMoviesUserData()
+                FileManagerVM.TopMoviesFM.saveData(dataResp.items)
+            }
         }
     }
     

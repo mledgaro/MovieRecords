@@ -13,8 +13,8 @@ class MovieDetailedVM: ObservableObject {
     
     init(_ id: String) {
         
-        self.movie = MovieDetailed.SHAWSHANK_REDEMPTION
         self.id = id
+        self.movie = MovieDetailed.DUMMY
         
         loadData()
     }
@@ -22,7 +22,7 @@ class MovieDetailedVM: ObservableObject {
     
     private func loadData() {
         
-        if let data = try! FileManagerVM.loadMovieDetailsFile(self.id) {
+        if let data = try! FileManagerVM.MovieDetailsFM.loadData(id) {
             movie = data
         } else {
             requestData()
@@ -33,9 +33,10 @@ class MovieDetailedVM: ObservableObject {
         
         AF.request(IMDbAPI.movieDetailsURLReq(self.id)).responseDecodable(of: MovieDetailed.self) { response in
             
-            self.movie = response.value ?? MovieDetailed.SHAWSHANK_REDEMPTION
-            
-            FileManagerVM.saveMovieDetailsFile(self.id, self.movie)
+            if let dataResp = response.value {
+                self.movie = dataResp
+                FileManagerVM.MovieDetailsFM.saveData(self.id, dataResp)
+            }
         }
     }
     
