@@ -3,14 +3,6 @@
 import Foundation
 
 
-private struct MovieCategories {
-    
-    var id: String
-    var favorite: Bool
-    var watched: Bool
-}
-
-
 struct MovieBasic: Codable {
     
     static let SHAWSHANK_REDEMPTION = MovieBasic(

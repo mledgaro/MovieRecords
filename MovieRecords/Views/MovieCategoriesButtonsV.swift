@@ -6,33 +6,29 @@ import SwiftUI
 struct MovieCategoriesButtonsV: View {
 
 
-    @State private var watched = false
-    @State private var favorite = false
-
-
+    @Binding var favorite: Bool
+    @Binding var watched: Bool
+    
+    
     var body: some View {
 
         HStack  {
 
             Spacer()
 
-            Button(action: {
-//                watched.toggle()
-            }) {
+            Button(action: {}) {
                 Image(systemName: watched ? "eye.fill" : "eye")
                     .resizable()
                     .scaledToFit()
             }
             .frame(width: 25.0, height: 25.0)
             .onTapGesture {
-                self.watched.toggle()
+                watched.toggle()
             }
 
             Spacer()
 
-            Button(action: {
-//                favorite.toggle()
-            }) {
+            Button(action: {}) {
                 Image(systemName: favorite ? "heart.fill" : "heart")
                     .resizable()
                     .scaledToFit()
@@ -53,6 +49,6 @@ struct MovieCategoriesButtonsV: View {
 
 struct MovieCategoriesButtonsV_Previews: PreviewProvider {
     static var previews: some View {
-        MovieCategoriesButtonsV()
+        MovieCategoriesButtonsV(favorite: .constant(false), watched: .constant(false))
     }
 }

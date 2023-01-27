@@ -6,7 +6,7 @@ import SwiftUI
 struct MovieListItem: View {
     
     
-    var movie: MovieBasic
+    @Binding var movie: MovieBasic
     
     
     var body: some View {
@@ -57,7 +57,7 @@ struct MovieListItem: View {
                 
             } // NavigationLink(destination: MovieDetails(imdbId: movie.id))
             
-            MovieCategoriesButtonsV()
+            MovieCategoriesButtonsV(favorite: $movie.favorite, watched: $movie.watched)
             
         } // VStack
             
@@ -69,6 +69,6 @@ struct MovieListItem: View {
 struct MovieListItem_Previews: PreviewProvider {
     
     static var previews: some View {
-        MovieListItem(movie: MovieBasic.SHAWSHANK_REDEMPTION)
+        MovieListItem(movie: .constant(MovieBasic.SHAWSHANK_REDEMPTION))
     }
 }

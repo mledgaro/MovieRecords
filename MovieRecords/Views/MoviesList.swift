@@ -5,7 +5,7 @@ import SwiftUI
 struct MoviesList: View {
     
     var title: String
-    var movies: [MovieBasic]
+    @Binding var movies: [MovieBasic]
     
     var body: some View {
         
@@ -16,7 +16,7 @@ struct MoviesList: View {
             
             NavigationView {
                 
-                List(movies, id: \.id) { movie in
+                List($movies, id: \.id) { movie in
                     MovieListItem(movie: movie)
                 }
             }
@@ -28,6 +28,6 @@ struct MoviesList: View {
 struct MoviesList_Previews: PreviewProvider {
     
     static var previews: some View {
-        MoviesList(title: "Top 250", movies: Array(repeating: MovieBasic.SHAWSHANK_REDEMPTION, count: 5))
+        MoviesList(title: "Top 250", movies: .constant(Array(repeating: MovieBasic.SHAWSHANK_REDEMPTION, count: 5)))
     }
 }

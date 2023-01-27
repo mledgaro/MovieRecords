@@ -11,9 +11,19 @@ class FileManagerVM {
         try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     }
     
+    private static var appDir: URL {
+        
+        try! FileManager.default.url(for: .applicationDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+    }
+    
     private static var topMoviesFile: URL {
         
         cachesDir.appendingPathComponent("top").appendingPathExtension(for: .json)
+    }
+    
+    private static var movieCategoriesFile: URL {
+        
+        appDir.appendingPathComponent("movieCategories").appendingPathExtension(for: .json)
     }
     
     
@@ -47,12 +57,25 @@ class FileManagerVM {
     
     static func loadTopMoviesFile() throws -> [MovieBasic]? {
         
-        return try loadFile(FileManagerVM.topMoviesFile)
+        return try loadFile(topMoviesFile)
     }
     
     static func loadMovieDetailsFile(_ id: String) throws -> MovieDetailed? {
         
-        return try loadFile(FileManagerVM.movieDetailsFile(id))
+        return try loadFile(movieDetailsFile(id))
+    }
+    
+    static func loadMovieCategoriesFile() throws -> [String : MovieCategories] {
+        
+        let data: [MovieCategories] = try loadFile(movieCategoriesFile) ?? []
+        
+        var dict: [String : MovieCategories] = [:]
+        
+        for item in data {
+            dict[item.id] = item
+        }
+        
+        return dict
     }
     
     static func saveTopMoviesFile(_ data: [MovieBasic]) {
@@ -63,6 +86,17 @@ class FileManagerVM {
     static func saveMovieDetailsFile(_ id: String, _ data: MovieDetailed) {
         
         saveFile(obj: data, file: movieDetailsFile(id))
+    }
+    
+    static func saveMovieCategoriesFile(_ data: [MovieBasic]) {
+        
+        var movieCatsArr: [MovieCategories] = []
+        
+        for movie in data {
+            movieCatsArr.append(MovieCategories(id: movie.id, favorite: movie.favorite, watched: movie.watched))
+        }
+        
+        saveFile(obj: movieCatsArr, file: movieCategoriesFile)
     }
     
 }

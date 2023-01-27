@@ -6,12 +6,14 @@ struct ContentView: View {
     
     @StateObject private var topMoviesVM = TopMoviesVM()
     
+    @Environment(\.scenePhase) private var scenePhase
+    
     
     var body: some View {
         
         TabView {
             
-            MoviesList(title: "Top 250", movies: topMoviesVM.movies)
+            MoviesList(title: "Top 250", movies: $topMoviesVM.movies)
                 .tabItem {
                     Label("Top 250", systemImage: "square.3.layers.3d")
                 }
@@ -32,8 +34,10 @@ struct ContentView: View {
                 }
             
         }
-        .onDisappear {
-            print("DISAPPEAR EVENT")
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive {
+                FileManagerVM.saveMovieCategoriesFile(topMoviesVM.movies)
+            }
         }
     }
 }

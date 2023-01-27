@@ -14,10 +14,13 @@ class TopMoviesVM: ObservableObject {
     
     @Published var movies: [MovieBasic]
     
+    private var movieCategories: [String : MovieCategories]
+    
     
     init() {
         
         self.movies = []
+        self.movieCategories = [:]
         
         loadData()
     }
@@ -27,8 +30,21 @@ class TopMoviesVM: ObservableObject {
         
         if let data = try! FileManagerVM.loadTopMoviesFile() {
             movies = data
+            loadMovieCategories()
         } else {
             requestData()
+        }
+    }
+    
+    private func loadMovieCategories() {
+        
+        movieCategories = try! FileManagerVM.loadMovieCategoriesFile()
+        
+        for i in 0..<movies.count {
+            if let movieCat = movieCategories[movies[i].id] {
+                movies[i].favorite = movieCat.favorite
+                movies[i].watched = movieCat.watched
+            }
         }
     }
     
@@ -39,6 +55,8 @@ class TopMoviesVM: ObservableObject {
             //            debugPrint(response)
             
             self.movies = response.value?.items ?? []
+            
+            self.loadMovieCategories()
             
             //            debugPrint(self.movies[...10])
             
