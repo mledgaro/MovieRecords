@@ -36,6 +36,13 @@ struct MovieDetailed: Codable {
         languages: "<LANGUAGES>")
     
     
+    struct Trailer: Codable {
+        var videoId: String
+        var thumbnailUrl: String
+        var link: String
+        var linkEmbed: String
+    }
+    
     enum CodingKeys: String, CodingKey {
         
         case id
@@ -53,6 +60,7 @@ struct MovieDetailed: Codable {
         case countries
         case rating = "imDbRating"
         case languages
+        case trailer
     }
     
     var id: String
@@ -70,6 +78,7 @@ struct MovieDetailed: Codable {
     var countries: String
     var rating: String
     var languages: String
+    var trailer: Trailer
     
     
     init(from decoder: Decoder) throws {
@@ -90,6 +99,7 @@ struct MovieDetailed: Codable {
         self.countries = try container.decode(String.self, forKey: .countries)
         self.rating = try container.decode(String.self, forKey: .rating)
         self.languages = try container.decode(String.self, forKey: .languages)
+        self.trailer = try container.decode(Trailer.self, forKey: .trailer)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -110,6 +120,7 @@ struct MovieDetailed: Codable {
         try container.encode(self.countries, forKey: .countries)
         try container.encode(self.rating, forKey: .rating)
         try container.encode(self.languages, forKey: .languages)
+        try container.encode(self.trailer, forKey: .trailer)
     }
     
     init(id: String, title: String, year: String, imageUrl: String, /*releaseDate: String,*/ runtime: String, plot: String, directors: String, writers: String, stars: String, genres: String, countries: String, rating: String, languages: String) {
@@ -128,5 +139,6 @@ struct MovieDetailed: Codable {
         self.countries = countries
         self.rating = rating
         self.languages = languages
+        self.trailer = Trailer(videoId: "", thumbnailUrl: "", link: "", linkEmbed: "")
     }
 }

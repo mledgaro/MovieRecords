@@ -13,7 +13,7 @@ class IMDbAPI {
     }
     
     static func movieDetailsURLReq(_ imdbId: String) -> String {
-        return "\(IMDbAPI.baseUrl)Title/\(IMDbAPI.apiKey)/\(imdbId)"
+        return "\(IMDbAPI.baseUrl)Title/\(IMDbAPI.apiKey)/\(imdbId)/Trailer,"
     }
     
 }

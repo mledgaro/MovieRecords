@@ -36,7 +36,7 @@ struct ContentView: View {
                     }
                 
             } // Group
-//            .toolbar(.visible, for: .tabBar)
+            .toolbar(.visible, for: .tabBar)
 //            .toolbarBackground(Color("dark-highlight"), for: /*@START_MENU_TOKEN@*/.tabBar/*@END_MENU_TOKEN@*/)
             
         }

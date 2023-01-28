@@ -4,8 +4,11 @@ import SwiftUI
 
 struct MovieDetails: View {
     
+    
     @AppStorage("mr-theme") private var theme: String = "dark"
     @ObservedObject var movieDetailedVM: MovieDetailedVM
+    
+    @State private var showTrailer = false
     
     
     private var movie: MovieDetailed {
@@ -51,6 +54,23 @@ struct MovieDetails: View {
                         .multilineTextAlignment(.leading)
                         .padding(.vertical, 10.0)
                         .padding(.horizontal, 5.0)
+                    
+                    Button(action: {
+                        showTrailer = true
+                    }) {
+//                        NavigationLink(destination: MovieTrailer(title: movie.title, link: movie.trailer.link)) {
+//                            Label("Watch trailer", systemImage: "play.tv")
+//                        }
+                        Label("Watch trailer", systemImage: "play.tv")
+                    }
+                    .frame(width: 250.0, height: 50.0)
+                    .background(Color("\(theme)-highlight"))
+                    .foregroundColor(Color("\(theme)-background"))
+                    .cornerRadius(8.0)
+                    .padding(.vertical, 5.0)
+                    .sheet(isPresented: $showTrailer) {
+                        WebView(url: movie.trailer.linkEmbed)
+                    }
                     
                     VStack(alignment: .leading) {
                         

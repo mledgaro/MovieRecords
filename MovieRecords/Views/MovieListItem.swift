@@ -5,12 +5,11 @@ import SwiftUI
 
 struct MovieListItem: View {
     
-    
     @EnvironmentObject var topMoviesVM: TopMoviesVM
-    
     @AppStorage("mr-theme") private var theme: String = "dark"
     
     var index: Int
+    
     
     private var movie: MovieBasic {
         topMoviesVM.movies[index]
