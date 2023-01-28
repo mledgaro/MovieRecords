@@ -4,6 +4,8 @@ import SwiftUI
 
 struct HInfoLabel: View {
     
+    @AppStorage("mr-theme") private var theme: String = "dark"
+    
     var label: String
     var content: String
     
@@ -15,8 +17,10 @@ struct HInfoLabel: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.trailing)
                 .frame(width: 120.0, alignment: .trailing)
+                .foregroundColor(Color("\(theme)-highlight"))
                 
             Text(content)
+                .foregroundColor(Color("\(theme)-text"))
                 .multilineTextAlignment(.leading)
                 .frame(width: 220.0, alignment: .leading)
         }

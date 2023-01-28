@@ -8,6 +8,8 @@ struct MovieListItem: View {
     
     @EnvironmentObject var topMoviesVM: TopMoviesVM
     
+    @AppStorage("mr-theme") private var theme: String = "dark"
+    
     var index: Int
     
     private var movie: MovieBasic {
@@ -23,16 +25,16 @@ struct MovieListItem: View {
                 
                 VStack(alignment: .leading, spacing: 5.0) {
                     
-                    HStack(alignment: .center) {
+                    HStack(alignment: .top) {
                         
                         Text("\(movie.rank).")
                             .font(.title3)
                             .fontWeight(.black)
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("\(theme)-highlight"))
                         
                         Text(movie.title)
                             .font(.title3)
-                            .foregroundColor(Color.white)
+                            .fontWeight(.bold)
                         
                     } // HStack
                     
@@ -43,17 +45,21 @@ struct MovieListItem: View {
                         } placeholder: {
                             ProgressView()
                         }
+                        .border(Color("\(theme)-highlight"), width: /*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                        .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                         
                         VStack(alignment: .leading) {
                             
-                            Text(movie.year)
-                                .font(.headline)
-                                .fontWeight(.black)
-                                .multilineTextAlignment(.leading)
-                            
                             Text(movie.crew)
                                 .font(.headline)
+                                .fontWeight(.regular)
                                 .multilineTextAlignment(.leading)
+                            
+                            Text(movie.year)
+                                .font(.headline)
+                                .fontWeight(.semibold)
+                                .multilineTextAlignment(.leading)
+                            
                         }
                         
                     } // HStack - Image
@@ -66,6 +72,9 @@ struct MovieListItem: View {
             MovieCategoriesButtonsV(index: index)
             
         } // VStack
+        .foregroundColor(Color("\(theme)-text"))
+        .background(Color("\(theme)-background"))
+         
             
     } // var body: some View
     

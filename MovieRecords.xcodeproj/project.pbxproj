@@ -136,11 +136,11 @@
 		048005C5297AE43100F75D5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				046B9B11298188800021DA84 /* MovieCategoriesButtonsV.swift */,
 				048005C6297AE45A00F75D5A /* MovieListItem.swift */,
 				048005CB297B0F9300F75D5A /* MoviesList.swift */,
 				047E4D792980C9D300A86D37 /* HInfoLabel.swift */,
 				048005CD297B294D00F75D5A /* MovieDetails.swift */,
-				046B9B11298188800021DA84 /* MovieCategoriesButtonsV.swift */,
 				047C3A81298447D9001A20FD /* Settings.swift */,
 			);
 			path = Views;

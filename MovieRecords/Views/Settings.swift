@@ -14,35 +14,43 @@ enum Theme {
 
 struct Settings: View {
     
-    @State private var selectedTheme: Theme = .dark
+    @AppStorage("mr-theme") private var theme: String = "dark"
     
     var body: some View {
         
         Form {
             
-            Section(header: Text("Appearence")) {
-                Picker("Theme", selection: $selectedTheme) {
-                    Text("Clear").tag(Theme.clear)
-                    Text("Dark").tag(Theme.dark)
+            Section(header: Text("Appearence")
+                .font(.headline)
+                .foregroundColor(Color("\(theme)-highlight"))) {
+                    
+                Picker("Theme", selection: $theme) {
+                    Text("Light").tag("light")
+                    Text("Dark").tag("dark")
                 }
             }
             
-            Section(header: Text("Cache")) {
+            Section(header: Text("Cache")
+                .font(.headline)
+                .foregroundColor(Color("\(theme)-highlight"))) {
+                
                 Button(action: {
                     print("RELOAD CACHE")
                 }) {
                     Label("Reload", systemImage: "arrow.triangle.2.circlepath")
                 }
+                
                 Button(action: {
                     print("DELETE CACHE")
                 }) {
                     Label("Delete", systemImage: "trash")
-                        .foregroundColor(/*@START_MENU_TOKEN@*/.red/*@END_MENU_TOKEN@*/)
                 }
             }
-                          
-        }
-         // VStack
+            
+        } // Form
+        .scrollContentBackground(.hidden)
+        .background(Color("\(theme)-background"))
+        
         
     } //  var body: some View
     
