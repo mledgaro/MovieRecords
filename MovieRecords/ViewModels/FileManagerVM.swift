@@ -16,6 +16,16 @@ class FileManagerVM {
         try! FileManager.default.url(for: .applicationDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     }
     
+    static func deleteCache() {
+        
+        let cacheFiles = try! FileManager.default.contentsOfDirectory(at: cachesDir, includingPropertiesForKeys: nil, options:  .skipsHiddenFiles).filter{ $0.pathExtension == "json" }
+        
+        for fileUrl in cacheFiles {
+            
+            debugPrint(fileUrl)
+            try! FileManager.default.removeItem(at: fileUrl)
+        }
+    }
     
     private static func fileExists(_ file: URL) -> Bool {
         

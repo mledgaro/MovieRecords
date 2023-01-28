@@ -16,6 +16,8 @@ struct Settings: View {
     
     @AppStorage("mr-theme") private var theme: String = "dark"
     
+    @State private var deleteCacheAlert = false
+    
     var body: some View {
         
         Form {
@@ -39,11 +41,22 @@ struct Settings: View {
                 }) {
                     Label("Reload", systemImage: "arrow.triangle.2.circlepath")
                 }
-                
+                    
                 Button(action: {
                     print("DELETE CACHE")
+                    deleteCacheAlert = true
                 }) {
                     Label("Delete", systemImage: "trash")
+                }
+                .alert("Are you sure you want to delete all cache files?", isPresented: $deleteCacheAlert) {
+                    
+                    Button("Cancel", role: .cancel) { print("cancel") }
+                    
+                    Button("Delete", role: .destructive) {
+                        print("delete")
+                        FileManagerVM.deleteCache()
+                    }
+                    
                 }
             }
             
