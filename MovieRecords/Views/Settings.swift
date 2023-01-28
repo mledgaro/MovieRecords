@@ -18,6 +18,8 @@ struct Settings: View {
     
     @State private var deleteCacheAlert = false
     
+    @EnvironmentObject var topMoviesVM: TopMoviesVM
+    
     var body: some View {
         
         Form {
@@ -36,11 +38,6 @@ struct Settings: View {
                 .font(.headline)
                 .foregroundColor(Color("\(theme)-highlight"))) {
                 
-                Button(action: {
-                    print("RELOAD CACHE")
-                }) {
-                    Label("Reload", systemImage: "arrow.triangle.2.circlepath")
-                }
                     
                 Button(action: {
                     print("DELETE CACHE")
@@ -55,6 +52,7 @@ struct Settings: View {
                     Button("Delete", role: .destructive) {
                         print("delete")
                         FileManagerVM.deleteCache()
+                        topMoviesVM.loadData()
                     }
                     
                 }
@@ -71,6 +69,6 @@ struct Settings: View {
 
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
-        Settings()
+        Settings().environmentObject(TopMoviesVM())
     }
 }

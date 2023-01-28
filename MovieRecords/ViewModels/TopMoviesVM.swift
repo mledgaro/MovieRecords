@@ -29,7 +29,7 @@ class TopMoviesVM: ObservableObject {
     }
     
     
-    private func loadData() {
+    func loadData() {
         
         guard let data = try! FileManagerVM.TopMoviesFM.loadData() else {
             requestData()
