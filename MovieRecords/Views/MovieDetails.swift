@@ -58,9 +58,6 @@ struct MovieDetails: View {
                     Button(action: {
                         showTrailer = true
                     }) {
-//                        NavigationLink(destination: MovieTrailer(title: movie.title, link: movie.trailer.link)) {
-//                            Label("Watch trailer", systemImage: "play.tv")
-//                        }
                         Label("Watch trailer", systemImage: "play.tv")
                     }
                     .frame(width: 250.0, height: 50.0)
@@ -77,7 +74,8 @@ struct MovieDetails: View {
                         HInfoLabel(label: "Directed by", content: movie.directors)
                         HInfoLabel(label: "Written by", content: movie.writers)
                         HInfoLabel(label: "Stars", content: movie.stars)
-                        HInfoLabel(label: "IMDb rating", content: movie.rating)
+//                        HInfoLabel(label: "IMDb rating", content: movie.rating)
+                        RatingLabel(rating: movie.rating)
                         HInfoLabel(label: "Duration", content: movie.runtime)
                         HInfoLabel(label: "Genre(s)", content: movie.genres)
                         HInfoLabel(label: "Country", content: movie.countries)
