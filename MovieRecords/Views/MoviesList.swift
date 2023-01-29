@@ -7,7 +7,7 @@ struct MoviesList: View {
     
     @EnvironmentObject var topMoviesVM: TopMoviesVM
     
-    @AppStorage("mr-theme") private var theme: String = "dark"
+    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
     
     var title: String
     
@@ -45,7 +45,7 @@ struct MoviesList: View {
             Text(title)
                 .font(.largeTitle)
                 .fontWeight(.heavy)
-                .foregroundColor(Color("\(theme)-highlight"))
+                .foregroundColor(colorTheme.highlight)
                 .multilineTextAlignment(.center)
             
             NavigationView {
@@ -53,15 +53,15 @@ struct MoviesList: View {
                 List(topMoviesVM.movies, id: \.id) { movie in
                     if filterFunc(movie) {
                         MovieListItem(index: movie.index)
-                            .listRowBackground(Color("\(theme)-background"))
+                            .listRowBackground(colorTheme.background)
                     }
                 }
                 .scrollContentBackground(.hidden)
-                .background(Color("\(theme)-background"))
+                .background(colorTheme.background)
             }
             
         }
-        .background(Color("\(theme)-background"))
+        .background(colorTheme.background)
     }
 }
 

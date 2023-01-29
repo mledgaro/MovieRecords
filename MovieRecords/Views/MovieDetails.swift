@@ -5,7 +5,7 @@ import SwiftUI
 struct MovieDetails: View {
     
     
-    @AppStorage("mr-theme") private var theme: String = "dark"
+    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
     @ObservedObject var movieDetailedVM: MovieDetailedVM
     
     @State private var showTrailer = false
@@ -26,7 +26,7 @@ struct MovieDetails: View {
             
         ZStack {
             
-            Color("\(theme)-background")
+            colorTheme.background
             
             ScrollView {
                 
@@ -36,7 +36,7 @@ struct MovieDetails: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(Color("\(theme)-highlight"))
+                        .foregroundColor(colorTheme.highlight)
                         
                     Text(movie.year)
                         .font(.title3)
@@ -47,7 +47,7 @@ struct MovieDetails: View {
                         ProgressView()
                     }
                     .frame(width: 350.0)
-                    .border(Color("\(theme)-highlight"), width: /*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                    .border(colorTheme.highlight, width: /*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                     .cornerRadius(/*@START_MENU_TOKEN@*/5.0/*@END_MENU_TOKEN@*/)
                     
                     Text(movie.plot)
@@ -64,8 +64,8 @@ struct MovieDetails: View {
                         Label("Watch trailer", systemImage: "play.tv")
                     }
                     .frame(width: 250.0, height: 50.0)
-                    .background(Color("\(theme)-highlight"))
-                    .foregroundColor(Color("\(theme)-background"))
+                    .background(colorTheme.highlight)
+                    .foregroundColor(colorTheme.background)
                     .cornerRadius(8.0)
                     .padding(.vertical, 5.0)
                     .sheet(isPresented: $showTrailer) {
@@ -101,7 +101,7 @@ struct MovieDetails: View {
                 .padding(.top, 60.0)
                 
             } // ScrollView
-            .foregroundColor(Color("\(theme)-text"))
+            .foregroundColor(colorTheme.text)
             
         } // ZStack
         .ignoresSafeArea()

@@ -5,7 +5,7 @@ import SwiftUI
 
 struct MovieCategoriesButtonsV: View {
 
-    @AppStorage("mr-theme") private var theme: String = "dark"
+    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
     @EnvironmentObject var topMoviesVM: TopMoviesVM
     
     var index: Int
@@ -49,7 +49,7 @@ struct MovieCategoriesButtonsV: View {
             Spacer()
 
         }
-        .foregroundColor(Color("\(theme)-highlight")) // HStack
+        .foregroundColor(colorTheme.highlight) // HStack
 
     } // var body: some View
 

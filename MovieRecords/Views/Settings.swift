@@ -14,7 +14,7 @@ enum Theme {
 
 struct Settings: View {
     
-    @AppStorage("mr-theme") private var theme: String = "dark"
+    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
     
     @State private var deleteCacheAlert = false
     
@@ -26,17 +26,17 @@ struct Settings: View {
             
             Section(header: Text("Appearence")
                 .font(.headline)
-                .foregroundColor(Color("\(theme)-highlight"))) {
+                .foregroundColor(colorTheme.highlight)) {
                     
-                Picker("Theme", selection: $theme) {
-                    Text("Light").tag("light")
-                    Text("Dark").tag("dark")
+                Picker("Theme", selection: $colorTheme) {
+                    Text("Clear").tag(AppTheme.clear)
+                    Text("Dark").tag(AppTheme.dark)
                 }
             }
             
             Section(header: Text("Cache")
                 .font(.headline)
-                .foregroundColor(Color("\(theme)-highlight"))) {
+                .foregroundColor(colorTheme.highlight)) {
                 
                     
                 Button(action: {
@@ -60,8 +60,7 @@ struct Settings: View {
             
         } // Form
         .scrollContentBackground(.hidden)
-        .background(Color("\(theme)-background"))
-        
+        .background(colorTheme.background)
         
     } //  var body: some View
     

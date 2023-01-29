@@ -4,11 +4,13 @@ import SwiftUI
 
 struct ContentView: View {
     
+
     @StateObject var topMoviesVM = TopMoviesVM()
     
     @Environment(\.scenePhase) private var scenePhase
     
-    @AppStorage("mr-theme") private var theme: String = "dark"
+    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
+    
     
     var body: some View {
         
@@ -36,7 +38,7 @@ struct ContentView: View {
                     }
                 
             } // Group
-            .toolbar(.visible, for: .tabBar)
+//            .toolbar(.visible, for: .tabBar)
 //            .toolbarBackground(Color("dark-highlight"), for: /*@START_MENU_TOKEN@*/.tabBar/*@END_MENU_TOKEN@*/)
             
         }

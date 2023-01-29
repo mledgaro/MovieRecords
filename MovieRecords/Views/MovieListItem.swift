@@ -6,7 +6,7 @@ import SwiftUI
 struct MovieListItem: View {
     
     @EnvironmentObject var topMoviesVM: TopMoviesVM
-    @AppStorage("mr-theme") private var theme: String = "dark"
+    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
     
     var index: Int
     
@@ -29,7 +29,7 @@ struct MovieListItem: View {
                         Text("\(movie.rank).")
                             .font(.title3)
                             .fontWeight(.black)
-                            .foregroundColor(Color("\(theme)-highlight"))
+                            .foregroundColor(colorTheme.highlight)
                         
                         Text(movie.title)
                             .font(.title3)
@@ -44,7 +44,7 @@ struct MovieListItem: View {
                         } placeholder: {
                             ProgressView()
                         }
-                        .border(Color("\(theme)-highlight"), width: /*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                        .border(colorTheme.highlight, width: /*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                         .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                         
                         VStack(alignment: .leading) {
@@ -71,8 +71,8 @@ struct MovieListItem: View {
             MovieCategoriesButtonsV(index: index)
             
         } // VStack
-        .foregroundColor(Color("\(theme)-text"))
-        .background(Color("\(theme)-background"))
+        .foregroundColor(colorTheme.text)
+        .background(colorTheme.background)
          
             
     } // var body: some View
