@@ -22,14 +22,19 @@ struct ContentView: View {
                         Label("Top 250", systemImage: "square.3.layers.3d")
                     }
                     
-                MoviesList(title: "Favorites", filter: .favorites)
-                    .tabItem {
-                        Label("Favorites", systemImage: "heart.fill")
-                    }
-                
                 MoviesList(title: "Watched", filter: .watched)
                     .tabItem {
                         Label("Watched", systemImage: "eye")
+                    }
+                
+                MoviesList(title: "Pending", filter: .pending)
+                    .tabItem {
+                        Label("Pending", systemImage: "eye.slash")
+                    }
+                
+                MoviesList(title: "Favorites", filter: .favorites)
+                    .tabItem {
+                        Label("Favorites", systemImage: "heart.fill")
                     }
                 
                 Settings()

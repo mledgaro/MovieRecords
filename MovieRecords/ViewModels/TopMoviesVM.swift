@@ -5,7 +5,22 @@ import Alamofire
 
 
 enum MoviesFilter {
-    case all, favorites, watched
+    case all, favorites, watched, pending
+    
+    func filter(_ movie: MovieBasic) -> Bool {
+        
+        switch self {
+            
+        case .all:
+            return true
+        case .favorites:
+            return movie.favorite
+        case .watched:
+            return movie.watched
+        case .pending:
+            return !movie.watched
+        }
+    }
 }
 
 

@@ -74,7 +74,6 @@ struct MovieDetails: View {
                         HInfoLabel(label: "Directed by", content: movie.directors)
                         HInfoLabel(label: "Written by", content: movie.writers)
                         HInfoLabel(label: "Stars", content: movie.stars)
-//                        HInfoLabel(label: "IMDb rating", content: movie.rating)
                         RatingLabel(rating: movie.rating)
                         HInfoLabel(label: "Duration", content: movie.runtime)
                         HInfoLabel(label: "Genre(s)", content: movie.genres)
@@ -82,27 +81,14 @@ struct MovieDetails: View {
                         HInfoLabel(label: "Language", content: movie.languages)
                     }
                     
-                    
-                    //            VStack {
-                    //                Text("Your rating")
-                    //                    .fontWeight(.bold)
-                    //                HStack {
-                    //                    Image(systemName: "star")
-                    //                    Image(systemName: "star")
-                    //                    Image(systemName: "star")
-                    //                    Image(systemName: "star")
-                    //                    Image(systemName: "star")
-                    //                }
-                    //            }
-                    
                 } // VStack
-                .padding(.top, 60.0)
+//                .padding(.top, 60.0)
                 
             } // ScrollView
             .foregroundColor(colorTheme.text)
             
         } // ZStack
-        .ignoresSafeArea()
+//        .ignoresSafeArea()
             
     } // var body: some View
     
