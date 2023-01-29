@@ -74,6 +74,7 @@ struct MovieDetails: View {
                         HInfoLabel(label: "Directed by", content: movie.directors)
                         HInfoLabel(label: "Written by", content: movie.writers)
                         HInfoLabel(label: "Stars", content: movie.stars)
+//                        Text("show full cast")
                         RatingLabel(rating: movie.rating)
                         HInfoLabel(label: "Duration", content: movie.runtime)
                         HInfoLabel(label: "Genre(s)", content: movie.genres)
@@ -82,7 +83,7 @@ struct MovieDetails: View {
                     }
                     
                 } // VStack
-//                .padding(.top, 60.0)
+                .padding(.vertical, 15.0)
                 
             } // ScrollView
             .foregroundColor(colorTheme.text)

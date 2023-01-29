@@ -58,6 +58,18 @@ struct Settings: View {
                 }
             }
             
+            Section(header: Text("Developer").font(.headline)
+                .foregroundColor(colorTheme.highlight)) {
+                    
+                    Text("Edgar Mendoza")
+                }
+            
+            Section(header: Text("Contact").font(.headline)
+                .foregroundColor(colorTheme.highlight)) {
+                    
+                    Text("mledgaro@gmail.com")
+                }
+            
         } // Form
         .scrollContentBackground(.hidden)
         .background(colorTheme.background)
