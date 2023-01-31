@@ -21,15 +21,11 @@ struct MovieCategoriesButtonsV: View {
     }
     
     
-//    init(imdbId: String) {
-//
-//        self.imdbId = imdbId
-//
-//        debugPrint(userDataVM)
-//
-//        let ud = userDataVM.getUserData(imdbId)
-//        debugPrint(ud)
-//    }
+    init(_ imdbId: String) {
+        
+        self.imdbId = imdbId
+    }
+    
     
     var body: some View {
 
@@ -74,7 +70,7 @@ struct MovieCategoriesButtonsV: View {
 struct MovieCategoriesButtonsV_Previews: PreviewProvider {
     
     static var previews: some View {
-        MovieCategoriesButtonsV(imdbId: "tt0111161")
+        MovieCategoriesButtonsV("tt0111161")
             .environmentObject(MoviesUserDataVM())
     }
 }

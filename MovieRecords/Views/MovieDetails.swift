@@ -7,12 +7,20 @@ struct MovieDetails: View {
     
     @AppStorage("mr-theme") private var colorTheme: ColorTheme = .dark
     
-    var movieDet: MovieDetailedVM
+    @EnvironmentObject private var movieDetailsVM: MovieDetailsVM
+    
+    private var movie: MovieDetailed {
+        movieDetailsVM.getMovieData(imdbId)
+    }
     
     @State private var showTrailer = false
     
-    private var movie: MovieDetailed {
-        movieDet.movie
+    var imdbId: String
+    
+    
+    init(_ imdbId: String) {
+        
+        self.imdbId = imdbId
     }
     
     
@@ -107,6 +115,7 @@ struct MovieDetails_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        MovieDetails(movieDet: MovieDetailedVM("tt0111161"))
+        MovieDetails("tt0111161")
+            .environmentObject(MovieDetailsVM())
     }
 }

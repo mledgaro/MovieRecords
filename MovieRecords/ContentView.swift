@@ -10,6 +10,7 @@ struct ContentView: View {
     
     @StateObject private var topMoviesVM = TopMoviesVM()
     @StateObject private var userDataVM = MoviesUserDataVM()
+    @StateObject private var movieDetailsVM = MovieDetailsVM()
     
     
     var body: some View {
@@ -49,8 +50,11 @@ struct ContentView: View {
         } // TabView
         .environmentObject(self.topMoviesVM)
         .environmentObject(self.userDataVM)
+        .environmentObject(self.movieDetailsVM)
         .onChange(of: scenePhase) { phase in
+            
             if phase == .inactive {
+                
                 userDataVM.saveData()
                 print("USER DATA SAVED")
             }

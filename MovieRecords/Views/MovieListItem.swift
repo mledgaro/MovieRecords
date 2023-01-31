@@ -20,7 +20,7 @@ struct MovieListItem: View {
         
         VStack {
             
-            NavigationLink(destination: MovieDetails(movieDet:  MovieDetailedVM(movie.id))) {
+            NavigationLink(destination: MovieDetails(movie.id)) {
                 
                 VStack(alignment: .leading, spacing: 5.0) {
                     
@@ -68,7 +68,7 @@ struct MovieListItem: View {
                 
             } // NavigationLink(destination: MovieDetails(imdbId: movie.id))
             
-            MovieCategoriesButtonsV(imdbId: movie.id)
+            MovieCategoriesButtonsV(movie.id)
             
         } // VStack
         .foregroundColor(colorTheme.text)
@@ -85,6 +85,5 @@ struct MovieListItem_Previews: PreviewProvider {
     static var previews: some View {
         MovieListItem(index: 0)
             .environmentObject(TopMoviesVM())
-            .environmentObject(MoviesUserDataVM())
     }
 }
