@@ -30,6 +30,7 @@
 		048005C7297AE45A00F75D5A /* MovieListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048005C6297AE45A00F75D5A /* MovieListItem.swift */; };
 		048005CC297B0F9300F75D5A /* MoviesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048005CB297B0F9300F75D5A /* MoviesList.swift */; };
 		048005CE297B294E00F75D5A /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048005CD297B294D00F75D5A /* MovieDetails.swift */; };
+		0484DC3F2989DEC90017C039 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0484DC3E2989DEC90017C039 /* README.md */; };
 		048F0E2529859EAA00EB638B /* movie_details-api_response_example.json in Resources */ = {isa = PBXBuildFile; fileRef = 048F0E2429859EAA00EB638B /* movie_details-api_response_example.json */; };
 		048F0E272985AB3800EB638B /* top_250_movies-api_response_example.json in Resources */ = {isa = PBXBuildFile; fileRef = 048F0E262985AB3800EB638B /* top_250_movies-api_response_example.json */; };
 		048F0E292985C2C700EB638B /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F0E282985C2C700EB638B /* WebView.swift */; };
@@ -64,6 +65,7 @@
 		048005C6297AE45A00F75D5A /* MovieListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListItem.swift; sourceTree = "<group>"; };
 		048005CB297B0F9300F75D5A /* MoviesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesList.swift; sourceTree = "<group>"; };
 		048005CD297B294D00F75D5A /* MovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
+		0484DC3E2989DEC90017C039 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = MovieRecords/README.md; sourceTree = SOURCE_ROOT; };
 		048F0E2429859EAA00EB638B /* movie_details-api_response_example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "movie_details-api_response_example.json"; sourceTree = "<group>"; };
 		048F0E262985AB3800EB638B /* top_250_movies-api_response_example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "top_250_movies-api_response_example.json"; sourceTree = "<group>"; };
 		048F0E282985C2C700EB638B /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				048005C5297AE43100F75D5A /* Views */,
 				047E4D742980C98500A86D37 /* ViewModels */,
 				048005B8297ADE0400F75D5A /* Assets.xcassets */,
+				0484DC3E2989DEC90017C039 /* README.md */,
 				048F0E262985AB3800EB638B /* top_250_movies-api_response_example.json */,
 				048F0E2429859EAA00EB638B /* movie_details-api_response_example.json */,
 				048005BA297ADE0400F75D5A /* Preview Content */,
@@ -252,6 +255,7 @@
 			files = (
 				048005BC297ADE0400F75D5A /* Preview Assets.xcassets in Resources */,
 				048005B9297ADE0400F75D5A /* Assets.xcassets in Resources */,
+				0484DC3F2989DEC90017C039 /* README.md in Resources */,
 				048F0E2529859EAA00EB638B /* movie_details-api_response_example.json in Resources */,
 				048F0E272985AB3800EB638B /* top_250_movies-api_response_example.json in Resources */,
 			);
