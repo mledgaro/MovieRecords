@@ -10,8 +10,7 @@ struct MovieListItem: View {
     
     var index: Int
     
-    
-    private var movie: MovieBasic {
+    var movie: MovieBasic {
         topMoviesVM.movies[index]
     }
     
@@ -20,7 +19,7 @@ struct MovieListItem: View {
         
         VStack {
             
-            NavigationLink(destination: MovieDetails(MovieDetailedVM(movie.id))) {
+            NavigationLink(destination: MovieDetails(imdbId: movie.id)) {
                 
                 VStack(alignment: .leading, spacing: 5.0) {
                     
@@ -68,7 +67,7 @@ struct MovieListItem: View {
                 
             } // NavigationLink(destination: MovieDetails(imdbId: movie.id))
             
-            MovieCategoriesButtonsV(index: index)
+            MovieCategoriesButtonsV(imdbId: movie.id)
             
         } // VStack
         .foregroundColor(colorTheme.text)

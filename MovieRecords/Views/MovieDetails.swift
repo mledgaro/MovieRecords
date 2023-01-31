@@ -6,7 +6,7 @@ struct MovieDetails: View {
     
     
     @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
-    @ObservedObject var movieDetailedVM: MovieDetailedVM
+    @StateObject private var movieDetailedVM = MovieDetailedVM()
     
     @State private var showTrailer = false
     
@@ -16,14 +16,16 @@ struct MovieDetails: View {
     }
     
     
-    init(_ movieDetVM: MovieDetailedVM) {
+    init(imdbId: String) {
         
-        self.movieDetailedVM = movieDetVM
+//        self.movieDetailedVM = MovieDetailedVM()
+        
+        self.movieDetailedVM.loadData(imdbId)
     }
     
     
     var body: some View {
-            
+        
         ZStack {
             
             colorTheme.background
@@ -89,7 +91,6 @@ struct MovieDetails: View {
             .foregroundColor(colorTheme.text)
             
         } // ZStack
-//        .ignoresSafeArea()
             
     } // var body: some View
     
@@ -100,6 +101,6 @@ struct MovieDetails_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        MovieDetails(MovieDetailedVM("tt0111161"))
+        MovieDetails(imdbId: "tt0111161")
     }
 }

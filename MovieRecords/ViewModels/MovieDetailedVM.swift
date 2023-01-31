@@ -6,23 +6,27 @@ import Alamofire
 class MovieDetailedVM: ObservableObject {
     
     
-    var id: String
+    var imdbId: String
     
     @Published var movie: MovieDetailed
     
-    
-    init(_ id: String) {
-        
-        self.id = id
-        self.movie = MovieDetailed.DUMMY
-        
-        loadData()
+    private var file: URL {
+        FileManagerVM.cachesDir.appendingPathComponent(imdbId).appendingPathExtension(for: .json)
     }
     
     
-    private func loadData() {
+    init() {
         
-        if let data = try! FileManagerVM.MovieDetailsFM.loadData(id) {
+        self.imdbId = ""
+        self.movie = MovieDetailed.EMPTY
+    }
+    
+    
+    func loadData(_ imdbId: String) {
+        
+        self.imdbId = imdbId
+        
+        if let data = try! loadFile() {
             movie = data
         } else {
             requestData()
@@ -31,13 +35,23 @@ class MovieDetailedVM: ObservableObject {
     
     private func requestData() {
         
-        AF.request(IMDbAPI.movieDetailsURLReq(self.id)).responseDecodable(of: MovieDetailed.self) { response in
+        AF.request(IMDbAPI.movieDetailsURLReq(self.imdbId)).responseDecodable(of: MovieDetailed.self) { response in
             
             if let dataResp = response.value {
                 self.movie = dataResp
-                FileManagerVM.MovieDetailsFM.saveData(self.id, dataResp)
+                self.saveData()
             }
         }
+    }
+    
+    private func loadFile() throws -> MovieDetailed? {
+        
+        return try FileManagerVM.loadFile(file)
+    }
+    
+    private func saveData() {
+        
+        FileManagerVM.saveFile(data: self.movie, file: file)
     }
     
 }

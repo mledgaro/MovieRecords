@@ -4,12 +4,12 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
 
-    @StateObject var topMoviesVM = TopMoviesVM()
-    
     @Environment(\.scenePhase) private var scenePhase
     
-    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
+    @StateObject var topMoviesVM = TopMoviesVM()
+    @StateObject var userDataVM = MoviesUserDataVM()
     
     
     var body: some View {
@@ -46,17 +46,19 @@ struct ContentView: View {
 //            .toolbar(.visible, for: .tabBar)
 //            .toolbarBackground(Color("dark-highlight"), for: /*@START_MENU_TOKEN@*/.tabBar/*@END_MENU_TOKEN@*/)
             
-        }
+        } // TabView
         .environmentObject(topMoviesVM)
+        .environmentObject(userDataVM)
         .onChange(of: scenePhase) { phase in
             if phase == .inactive {
-                FileManagerVM.MoviesUserDataFM.saveData(topMoviesVM.movies)
+                userDataVM.saveData()
                 print("USER DATA SAVED")
             }
         }
         
-    }
-}
+    } // var body: some View
+    
+} // struct ContentView: View
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

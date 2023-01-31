@@ -4,72 +4,32 @@ import Foundation
 import Alamofire
 
 
-enum MoviesFilter {
-    case all, favorites, watched, pending
-    
-    func filter(_ movie: MovieBasic) -> Bool {
-        
-        switch self {
-            
-        case .all:
-            return true
-        case .favorites:
-            return movie.favorite
-        case .watched:
-            return movie.watched
-        case .pending:
-            return !movie.watched
-        }
-    }
+fileprivate struct APIResponseArray: Codable {
+    var items: [MovieBasic]
+    var errorMessage: String
 }
 
 
 class TopMoviesVM: ObservableObject {
     
     
-    private struct APIResponseArray: Codable {
-        var items: [MovieBasic]
-        var errorMessage: String
-    }
-    
-    
     @Published var movies: [MovieBasic]
+    
+    private var file: URL {
+        FileManagerVM.cachesDir.appendingPathComponent("top_movies").appendingPathExtension(for: .json)
+    }
     
     
     init() {
         
         self.movies = []
-        
-        loadData()
+    
+        self.loadData()
     }
     
     
-    func loadData() {
-        
-        guard let data = try! FileManagerVM.TopMoviesFM.loadData() else {
-            requestData()
-            return
-        }
-        
-        movies = data
-        loadMoviesUserData()
-    }
-    
-    private func loadMoviesUserData() {
-        
-        guard let moviesUserData = try! FileManagerVM.MoviesUserDataFM.loadData() else {
-            return
-        }
-        
-        for i in 0..<movies.count {
-            
-            guard let mud = moviesUserData[movies[i].id] else {
-                continue
-            }
-            
-            movies[i].favorite = mud.favorite
-            movies[i].watched = mud.watched
-        }
+    private func loadFile() throws -> [MovieBasic]? {
+        return try FileManagerVM.loadFile(file)
     }
     
     private func requestData() {
@@ -79,10 +39,26 @@ class TopMoviesVM: ObservableObject {
             if let dataResp = response.value {
                 
                 self.movies = dataResp.items
-                self.loadMoviesUserData()
-                FileManagerVM.TopMoviesFM.saveData(dataResp.items)
+                
+                self.saveData()
             }
         }
+    }
+    
+    private func saveData() {
+        
+        FileManagerVM.saveFile(data: self.movies, file: file)
+    }
+    
+    
+    func loadData() {
+        
+        guard let data = try! loadFile() else {
+            requestData()
+            return
+        }
+        
+        self.movies = data
     }
     
 }

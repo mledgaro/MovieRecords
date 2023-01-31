@@ -1,9 +1,22 @@
-//
+// Movie basic info
 
 import Foundation
 
 
+fileprivate enum CodingKeys: String, CodingKey {
+    
+    case id
+    case rank
+    case title
+    case year
+    case imageUrl = "image"
+    case crew
+    case rating = "imDbRating"
+}
+
+
 struct MovieBasic: Codable {
+    
     
     static let SHAWSHANK_REDEMPTION = MovieBasic(
         id: "tt0111161",
@@ -14,7 +27,7 @@ struct MovieBasic: Codable {
         crew: "Frank Darabont (dir.), Tim Robbins, Morgan Freeman",
         rating: "9.2")
     
-    static let DUMMY = MovieBasic(
+    static let EMPTY = MovieBasic(
         id: "",
         rank: "0",
         title: "<TITLE>",
@@ -24,26 +37,7 @@ struct MovieBasic: Codable {
         rating: "0.0")
     
     
-    enum CodingKeys: String, CodingKey {
-        
-        case id
-        case rank
-        case title
-        case year
-        case imageUrl = "image"
-        case crew
-        case rating = "imDbRating"
-    }
-    
-    /*
-     api response
-     {
-        items: [
-            {id:, rank:, title:, fullTitle:, year:, image:, crew:, imDbRating:, imDbRatingCount:}, ...
-        ],
-        errorMessage: ""
-     */
-    
+    // From IMDb API
     var id: String
     var rank: String
     var title: String
@@ -52,10 +46,22 @@ struct MovieBasic: Codable {
     var crew: String
     var rating: String
     
+    // Auxiliar
     var index: Int
-    var favorite: Bool
-    var watched: Bool
     
+    
+    init(id: String, rank: String, title: String, year: String, imageUrl: String, crew: String, rating: String) {
+        
+        self.id = id
+        self.rank = rank
+        self.title = title
+        self.year = year
+        self.imageUrl = URL(string: imageUrl)
+        self.crew = crew
+        self.rating = rating
+        
+        self.index = 0
+    }
     
     init(from decoder: Decoder) throws {
 
@@ -69,10 +75,10 @@ struct MovieBasic: Codable {
         self.crew = try container.decode(String.self, forKey: .crew)
         self.rating = try container.decode(String.self, forKey: .rating)
         
+        
         self.index = (Int(self.rank) ?? 0) - 1
-        self.favorite = false
-        self.watched = false
     }
+    
     
     func encode(to encoder: Encoder) throws {
         
@@ -86,21 +92,5 @@ struct MovieBasic: Codable {
         try container.encode(self.crew, forKey: .crew)
         try container.encode(self.rating, forKey: .rating)
     }
-    
-    init(id: String, rank: String, title: String, year: String, imageUrl: String, crew: String, rating: String) {
-        
-        self.id = id
-        self.rank = rank
-        self.title = title
-        self.year = year
-        self.imageUrl = URL(string: imageUrl)
-        self.crew = crew
-        self.rating = rating
-        
-        self.index = 0
-        self.favorite = false
-        self.watched = false
-    }
-    
     
 }

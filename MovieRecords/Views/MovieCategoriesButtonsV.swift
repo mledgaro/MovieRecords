@@ -6,17 +6,19 @@ import SwiftUI
 struct MovieCategoriesButtonsV: View {
 
     @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
-    @EnvironmentObject var topMoviesVM: TopMoviesVM
     
-    var index: Int
+    @EnvironmentObject var userDataVM: MoviesUserDataVM
     
-    private var favorite: Bool {
-        topMoviesVM.movies[index].favorite
+    var imdbId: String
+    
+    var favorite: Bool {
+        userDataVM.getUserData(imdbId).favorite
     }
     
-    private var watched: Bool {
-        topMoviesVM.movies[index].watched
+    var watched: Bool {
+        userDataVM.getUserData(imdbId).watched
     }
+    
     
     var body: some View {
 
@@ -31,7 +33,7 @@ struct MovieCategoriesButtonsV: View {
             }
             .frame(width: 25.0, height: 25.0)
             .onTapGesture {
-                topMoviesVM.movies[index].favorite.toggle()
+                userDataVM.userData[imdbId]?.favorite.toggle()
             }
 
             Spacer()
@@ -43,7 +45,7 @@ struct MovieCategoriesButtonsV: View {
             }
             .frame(width: 25.0, height: 25.0)
             .onTapGesture {
-                topMoviesVM.movies[index].watched.toggle()
+                userDataVM.userData[imdbId]?.watched.toggle()
             }
 
             Spacer()
@@ -57,8 +59,9 @@ struct MovieCategoriesButtonsV: View {
 
 
 struct MovieCategoriesButtonsV_Previews: PreviewProvider {
+    
     static var previews: some View {
-        MovieCategoriesButtonsV(index: 0)
-            .environmentObject(TopMoviesVM())
+        MovieCategoriesButtonsV(imdbId: "tt0111161")
+            .environmentObject(MoviesUserDataVM())
     }
 }

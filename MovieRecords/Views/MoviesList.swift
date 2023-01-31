@@ -4,10 +4,10 @@ import SwiftUI
 
 struct MoviesList: View {
     
+    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
     
     @EnvironmentObject var topMoviesVM: TopMoviesVM
-    
-    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
+    @EnvironmentObject var userDataVM: MoviesUserDataVM
     
     var title: String
     var filter: MoviesFilter
@@ -26,7 +26,9 @@ struct MoviesList: View {
             NavigationView {
                 
                 List(topMoviesVM.movies, id: \.id) { movie in
-                    if filter.filter(movie) {
+                    
+                    if userDataVM.isShowing(imdbId: movie.id, filter: filter) {
+                        
                         MovieListItem(index: movie.index)
                             .listRowBackground(colorTheme.background)
                     }
@@ -45,5 +47,6 @@ struct MoviesList_Previews: PreviewProvider {
     static var previews: some View {
         MoviesList(title: "Top 250", filter: .all)
             .environmentObject(TopMoviesVM())
+            .environmentObject(MoviesUserDataVM())
     }
 }

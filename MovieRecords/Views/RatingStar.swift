@@ -10,7 +10,7 @@ enum StarType: String {
 
 struct RatingStar: View {
     
-    private var type: StarType
+    var type: StarType
     
     init(_ type: StarType) {
         self.type = type
@@ -25,6 +25,7 @@ struct RatingStar: View {
 }
 
 struct RatingStar_Previews: PreviewProvider {
+    
     static var previews: some View {
         RatingStar(.fill)
     }
