@@ -68,7 +68,7 @@ struct MovieDetails: View {
                     .cornerRadius(8.0)
                     .padding(.vertical, 5.0)
                     .sheet(isPresented: $showTrailer) {
-                        WebView(url: movie.trailer.linkEmbed)
+                        WebView(url: movie.trailer?.linkEmbed ?? "")
                     }
                     
                     VStack(alignment: .leading) {
@@ -78,7 +78,7 @@ struct MovieDetails: View {
                         
                         HInfoLabel(label: "Stars", content: movie.stars)
                         
-                        NavigationLink(destination: ActorsList(actorList: movie.actorList)) {
+                        NavigationLink(destination: ActorsList(actorList: movie.actorList ?? [])) {
                             
                             HStack {
                                 

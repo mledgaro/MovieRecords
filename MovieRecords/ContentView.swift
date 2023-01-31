@@ -16,38 +16,37 @@ struct ContentView: View {
     var body: some View {
         
         TabView {
-//            Group {
-                
-                MoviesList(title: "Top 250", filter: .all)
-                    .tabItem {
-                        Label("Top 250", systemImage: "square.3.layers.3d")
-                    }
-                    
-                MoviesList(title: "Watched", filter: .watched)
-                    .tabItem {
-                        Label("Watched", systemImage: "eye")
-                    }
-                
-                MoviesList(title: "Pending", filter: .pending)
-                    .tabItem {
-                        Label("Pending", systemImage: "eye.slash")
-                    }
-                
-                MoviesList(title: "Favorites", filter: .favorites)
-                    .tabItem {
-                        Label("Favorites", systemImage: "heart.fill")
-                    }
-                
-                Settings()
-                    .tabItem {
-                        Label("Settings", systemImage: "gear")
-                    }
-                
-//            } // Group
-//            .toolbar(.visible, for: .tabBar)
-//            .toolbarBackground(Color("dark-highlight"), for: /*@START_MENU_TOKEN@*/.tabBar/*@END_MENU_TOKEN@*/)
             
+            MoviesList(title: "Top 250", filter: .all)
+                .tabItem {
+                    Label("Top 250", systemImage: "square.3.layers.3d")
+                }
+                
+            MoviesList(title: "Watched", filter: .watched)
+                .tabItem {
+                    Label("Watched", systemImage: "eye")
+                }
+            
+            MoviesList(title: "Pending", filter: .pending)
+                .tabItem {
+                    Label("Pending", systemImage: "eye.slash")
+                }
+            
+            MoviesList(title: "Favorites", filter: .favorites)
+                .tabItem {
+                    Label("Favorites", systemImage: "heart.fill")
+                }
+            
+            Settings()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
+                
         } // TabView
+//        .toolbarBackground(colorTheme.background, for: .tabBar)
+        .toolbar(.visible, for: .tabBar)
+        .accentColor(colorTheme.highlight)
+        
         .environmentObject(self.topMoviesVM)
         .environmentObject(self.userDataVM)
         .environmentObject(self.movieDetailsVM)
@@ -59,10 +58,17 @@ struct ContentView: View {
                 print("USER DATA SAVED")
             }
         }
+        .onAppear {
+            
+            UITabBar.appearance().barTintColor = UIColor(colorTheme.background)
+            UITabBar.appearance().unselectedItemTintColor = UIColor(colorTheme.text)
+        }
+        .id(colorTheme)
         
     } // var body: some View
     
 } // struct ContentView: View
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

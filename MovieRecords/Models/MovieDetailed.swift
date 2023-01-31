@@ -69,8 +69,8 @@ struct MovieDetailed: Codable {
     var countries: String
     var rating: String
     var languages: String
-    var trailer: Trailer
-    var actorList: [Actor]
+    var trailer: Trailer?
+    var actorList: [Actor]?
     
     
     init(id: String, title: String, year: String, imageUrl: String, runtime: String, plot: String, directors: String, writers: String, stars: String, genres: String, countries: String, rating: String, languages: String) {

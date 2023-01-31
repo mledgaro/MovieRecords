@@ -13,6 +13,29 @@ struct MoviesList: View {
     var filter: MoviesFilter
     
     
+    init(title: String, filter: MoviesFilter) {
+        
+        self.title = title
+        self.filter = filter
+        
+        let navigationAppearance = UINavigationBarAppearance()
+        
+        navigationAppearance.configureWithOpaqueBackground()
+        navigationAppearance.backgroundColor = UIColor(colorTheme.background)
+        
+//        navigationAppearance.titleTextAttributes = [.foregroundColor: titleColor ?? .black]
+//        navigationAppearance.largeTitleTextAttributes = [.foregroundColor: titleColor ?? .black]
+//       
+        UINavigationBar.appearance().standardAppearance = navigationAppearance
+        
+        UINavigationBar.appearance().compactAppearance = navigationAppearance
+        
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationAppearance
+//
+//        UINavigationBar.appearance().tintColor = tintColor ?? titleColor ?? .black
+    }
+    
+    
     var body: some View {
         
         VStack {
