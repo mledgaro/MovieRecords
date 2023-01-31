@@ -4,12 +4,13 @@ import SwiftUI
 
 struct RatingLabel: View {
     
-    @AppStorage("mr-theme") private var colorTheme: AppTheme = .clear
+    @AppStorage("mr-theme") private var colorTheme: ColorTheme = .clear
     
     private var rating: String
     private let fullStars: Int
     private let emptyStars: Int
     private let halfStar: Bool
+    
     
     init(rating: String) {
         
@@ -20,6 +21,7 @@ struct RatingLabel: View {
         self.halfStar = intRating % 2 == 1
         self.emptyStars = 5 - self.fullStars - (self.halfStar ? 1 : 0)
     }
+    
     
     var body: some View {
         

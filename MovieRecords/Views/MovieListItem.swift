@@ -5,8 +5,9 @@ import SwiftUI
 
 struct MovieListItem: View {
     
+    @AppStorage("mr-theme") private var colorTheme: ColorTheme = .dark
+    
     @EnvironmentObject var topMoviesVM: TopMoviesVM
-    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
     
     var index: Int
     
@@ -19,7 +20,7 @@ struct MovieListItem: View {
         
         VStack {
             
-            NavigationLink(destination: MovieDetails(imdbId: movie.id)) {
+            NavigationLink(destination: MovieDetails(movieDet:  MovieDetailedVM(movie.id))) {
                 
                 VStack(alignment: .leading, spacing: 5.0) {
                     
@@ -84,5 +85,6 @@ struct MovieListItem_Previews: PreviewProvider {
     static var previews: some View {
         MovieListItem(index: 0)
             .environmentObject(TopMoviesVM())
+            .environmentObject(MoviesUserDataVM())
     }
 }

@@ -3,7 +3,7 @@
 import Foundation
 import SwiftUI
 
-enum AppTheme: String {
+enum ColorTheme: String {
     
     case clear = "clear"
     case dark = "dark"

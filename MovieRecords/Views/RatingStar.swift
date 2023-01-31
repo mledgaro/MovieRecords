@@ -3,6 +3,7 @@
 import SwiftUI
 
 enum StarType: String {
+    
     case fill = "star.fill"
     case half = "star.leadinghalf.filled"
     case empty = "star"

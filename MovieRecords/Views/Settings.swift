@@ -1,24 +1,16 @@
 //
-//  Settings.swift
-//  MovieRecords
-//
-//  Created by MAC on 27/01/23.
-//
 
 import SwiftUI
-
-enum Theme {
-    case clear, dark
-}
 
 
 struct Settings: View {
     
-    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
+    @AppStorage("mr-theme") private var colorTheme: ColorTheme = .dark
+    
+    @EnvironmentObject var topMoviesVM: TopMoviesVM
     
     @State private var deleteCacheAlert = false
     
-    @EnvironmentObject var topMoviesVM: TopMoviesVM
     
     var body: some View {
         
@@ -29,8 +21,8 @@ struct Settings: View {
                 .foregroundColor(colorTheme.highlight)) {
                     
                 Picker("Theme", selection: $colorTheme) {
-                    Text("Clear").tag(AppTheme.clear)
-                    Text("Dark").tag(AppTheme.dark)
+                    Text("Clear").tag(ColorTheme.clear)
+                    Text("Dark").tag(ColorTheme.dark)
                 }
             }
             
@@ -38,7 +30,6 @@ struct Settings: View {
                 .font(.headline)
                 .foregroundColor(colorTheme.highlight)) {
                 
-                    
                 Button(action: {
                     print("DELETE CACHE")
                     deleteCacheAlert = true
@@ -54,7 +45,6 @@ struct Settings: View {
                         FileManagerVM.deleteCacheFiles()
                         topMoviesVM.loadData()
                     }
-                    
                 }
             }
             
@@ -79,6 +69,7 @@ struct Settings: View {
 } // struct Settings: View
 
 struct Settings_Previews: PreviewProvider {
+    
     static var previews: some View {
         Settings().environmentObject(TopMoviesVM())
     }

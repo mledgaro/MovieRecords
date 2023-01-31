@@ -4,7 +4,7 @@ import SwiftUI
 
 struct MoviesList: View {
     
-    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
+    @AppStorage("mr-theme") private var colorTheme: ColorTheme = .dark
     
     @EnvironmentObject var topMoviesVM: TopMoviesVM
     @EnvironmentObject var userDataVM: MoviesUserDataVM
@@ -41,6 +41,7 @@ struct MoviesList: View {
         .background(colorTheme.background)
     }
 }
+
 
 struct MoviesList_Previews: PreviewProvider {
     

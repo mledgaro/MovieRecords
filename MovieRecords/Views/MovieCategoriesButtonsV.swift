@@ -5,20 +5,31 @@ import SwiftUI
 
 struct MovieCategoriesButtonsV: View {
 
-    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
+    @AppStorage("mr-theme") private var colorTheme: ColorTheme = .dark
     
-    @EnvironmentObject var userDataVM: MoviesUserDataVM
+    @EnvironmentObject private var userDataVM: MoviesUserDataVM
+    
     
     var imdbId: String
     
     var favorite: Bool {
         userDataVM.getUserData(imdbId).favorite
     }
-    
+
     var watched: Bool {
         userDataVM.getUserData(imdbId).watched
     }
     
+    
+//    init(imdbId: String) {
+//
+//        self.imdbId = imdbId
+//
+//        debugPrint(userDataVM)
+//
+//        let ud = userDataVM.getUserData(imdbId)
+//        debugPrint(ud)
+//    }
     
     var body: some View {
 
@@ -33,6 +44,7 @@ struct MovieCategoriesButtonsV: View {
             }
             .frame(width: 25.0, height: 25.0)
             .onTapGesture {
+                debugPrint("favorite \(imdbId)")
                 userDataVM.userData[imdbId]?.favorite.toggle()
             }
 
@@ -45,6 +57,7 @@ struct MovieCategoriesButtonsV: View {
             }
             .frame(width: 25.0, height: 25.0)
             .onTapGesture {
+                debugPrint("watched \(imdbId)")
                 userDataVM.userData[imdbId]?.watched.toggle()
             }
 

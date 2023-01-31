@@ -4,18 +4,18 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
+    @AppStorage("mr-theme") private var colorTheme: ColorTheme = .dark
 
     @Environment(\.scenePhase) private var scenePhase
     
-    @StateObject var topMoviesVM = TopMoviesVM()
-    @StateObject var userDataVM = MoviesUserDataVM()
+    @StateObject private var topMoviesVM = TopMoviesVM()
+    @StateObject private var userDataVM = MoviesUserDataVM()
     
     
     var body: some View {
         
         TabView {
-            Group {
+//            Group {
                 
                 MoviesList(title: "Top 250", filter: .all)
                     .tabItem {
@@ -42,13 +42,13 @@ struct ContentView: View {
                         Label("Settings", systemImage: "gear")
                     }
                 
-            } // Group
+//            } // Group
 //            .toolbar(.visible, for: .tabBar)
 //            .toolbarBackground(Color("dark-highlight"), for: /*@START_MENU_TOKEN@*/.tabBar/*@END_MENU_TOKEN@*/)
             
         } // TabView
-        .environmentObject(topMoviesVM)
-        .environmentObject(userDataVM)
+        .environmentObject(self.topMoviesVM)
+        .environmentObject(self.userDataVM)
         .onChange(of: scenePhase) { phase in
             if phase == .inactive {
                 userDataVM.saveData()

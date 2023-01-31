@@ -15,16 +15,16 @@ class MovieDetailedVM: ObservableObject {
     }
     
     
-    init() {
+    init(_ imdbId: String) {
         
-        self.imdbId = ""
+        self.imdbId = imdbId
         self.movie = MovieDetailed.EMPTY
+        
+        loadData()
     }
     
     
-    func loadData(_ imdbId: String) {
-        
-        self.imdbId = imdbId
+    func loadData() {
         
         if let data = try! loadFile() {
             movie = data

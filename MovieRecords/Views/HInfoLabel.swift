@@ -4,7 +4,7 @@ import SwiftUI
 
 struct HInfoLabel: View {
     
-    @AppStorage("mr-theme") private var colorTheme: AppTheme = .clear
+    @AppStorage("mr-theme") private var colorTheme: ColorTheme = .clear
     
     var label: String
     var content: String

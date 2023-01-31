@@ -14,17 +14,19 @@ class MoviesUserDataVM: ObservableObject {
     
     init() {
         
-        self.userData = [:]
+        self.userData = [String : MovieUserData]()
         
-        try! self.loadData()
+        self.loadData()
     }
     
     
-    func loadData() throws {
+    func loadData() {
         
-        self.userData = [:]
-        
-        guard let data: [MovieUserData] = try! FileManagerVM.loadFile(file) else { return }
+        guard let data: [MovieUserData] = try! FileManagerVM.loadFile(self.file) else {
+            
+            debugPrint("MoviesUserData file does not exist yet")
+            return
+        }
         
         data.forEach { item in
             self.userData[item.imdbId] = item
@@ -32,16 +34,18 @@ class MoviesUserDataVM: ObservableObject {
     }
     
     func saveData() {
-        FileManagerVM.saveFile(data: Array(self.userData.values), file: file)
+        FileManagerVM.saveFile(data: Array(self.userData.values), file: self.file)
     }
     
     func getUserData(_ imdbId: String) -> MovieUserData {
 
-        if let _ = self.userData[imdbId] {
+        guard let ud = self.userData[imdbId] else {
+            
             self.userData[imdbId] = MovieUserData(imdbId: imdbId)
+            return self.userData[imdbId]!
         }
 
-        return self.userData[imdbId]!
+        return ud
     }
     
     func isShowing(imdbId: String, filter: MoviesFilter) -> Bool {

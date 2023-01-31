@@ -5,22 +5,14 @@ import SwiftUI
 struct MovieDetails: View {
     
     
-    @AppStorage("mr-theme") private var colorTheme: AppTheme = .dark
-    @StateObject private var movieDetailedVM = MovieDetailedVM()
+    @AppStorage("mr-theme") private var colorTheme: ColorTheme = .dark
+    
+    var movieDet: MovieDetailedVM
     
     @State private var showTrailer = false
     
-    
     private var movie: MovieDetailed {
-        movieDetailedVM.movie
-    }
-    
-    
-    init(imdbId: String) {
-        
-//        self.movieDetailedVM = MovieDetailedVM()
-        
-        self.movieDetailedVM.loadData(imdbId)
+        movieDet.movie
     }
     
     
@@ -75,8 +67,22 @@ struct MovieDetails: View {
                         
                         HInfoLabel(label: "Directed by", content: movie.directors)
                         HInfoLabel(label: "Written by", content: movie.writers)
+                        
                         HInfoLabel(label: "Stars", content: movie.stars)
-//                        Text("show full cast")
+                        
+                        NavigationLink(destination: ActorsList(actorList: movie.actorList)) {
+                            
+                            HStack {
+                                
+                                Text("See full actor list")
+                                
+                                Image(systemName: "arrow.forward")
+                                    .foregroundColor(colorTheme.highlight)
+                            }
+                            .padding(.leading, 150.0)
+                            .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
+                        }
+                        
                         RatingLabel(rating: movie.rating)
                         HInfoLabel(label: "Duration", content: movie.runtime)
                         HInfoLabel(label: "Genre(s)", content: movie.genres)
@@ -101,6 +107,6 @@ struct MovieDetails_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        MovieDetails(imdbId: "tt0111161")
+        MovieDetails(movieDet: MovieDetailedVM("tt0111161"))
     }
 }

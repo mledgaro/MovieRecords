@@ -24,6 +24,8 @@ class FileManagerVM {
     
     static func loadFile<T: Decodable>(_ file: URL) throws -> T? {
         
+        debugPrint("LOAD FILE:\t\(file)")
+        
         guard fileExists(file) else {
             return nil
         }
