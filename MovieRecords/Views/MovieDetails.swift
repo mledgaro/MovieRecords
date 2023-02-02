@@ -32,7 +32,7 @@ struct MovieDetails: View {
             
             ScrollView {
                 
-                VStack {
+                VStack(spacing: 5.0) {
                     
                     Text(movie.title)
                         .font(.title)
@@ -42,6 +42,8 @@ struct MovieDetails: View {
                         
                     Text(movie.year)
                         .font(.title3)
+                    
+                    RatingControl()
                     
                     AsyncImage(url: movie.imageUrl) { image in
                         image.resizable().scaledToFit()
@@ -71,7 +73,7 @@ struct MovieDetails: View {
                         WebView(url: movie.trailer?.linkEmbed ?? "")
                     }
                     
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 5.0) {
                         
                         HInfoLabel(label: "Directed by", content: movie.directors)
                         HInfoLabel(label: "Written by", content: movie.writers)
@@ -87,11 +89,21 @@ struct MovieDetails: View {
                                 Image(systemName: "arrow.forward")
                                     .foregroundColor(colorTheme.highlight)
                             }
-                            .padding(.leading, 150.0)
+                            .padding(.leading, 140.0)
                             .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
                         }
                         
-                        RatingLabel(rating: movie.rating)
+                        HStack(alignment: .center) {
+                            
+                            Text("IMDb rating:")
+                                .fontWeight(.bold)
+                                .frame(width: 120.0, alignment: .trailing)
+                                .foregroundColor(colorTheme.highlight)
+                                
+                            RatingLabel(.constant(Double(movie.rating) ?? 0.0))
+                        }
+                        .padding(.bottom, 0.5)
+                        
                         HInfoLabel(label: "Duration", content: movie.runtime)
                         HInfoLabel(label: "Genre(s)", content: movie.genres)
                         HInfoLabel(label: "Country", content: movie.countries)

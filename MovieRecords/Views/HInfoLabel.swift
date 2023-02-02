@@ -24,7 +24,6 @@ struct HInfoLabel: View {
                 .multilineTextAlignment(.leading)
                 .frame(width: 220.0, alignment: .leading)
         }
-        .padding(.bottom, 0.5)
     }
 }
 

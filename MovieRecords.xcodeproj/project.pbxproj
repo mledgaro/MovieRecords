@@ -11,6 +11,7 @@
 		047C3A7E2982E52E001A20FD /* AppFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C3A7D2982E52E001A20FD /* AppFile.swift */; };
 		047C3A80298349A1001A20FD /* MovieUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C3A7F298349A1001A20FD /* MovieUserData.swift */; };
 		047C3A82298447D9001A20FD /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C3A81298447D9001A20FD /* Settings.swift */; };
+		047DE3BE298C419800E624AA /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DE3BD298C419800E624AA /* RatingControl.swift */; };
 		047E4D762980C98500A86D37 /* MovieDetailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E4D722980C98500A86D37 /* MovieDetailed.swift */; };
 		047E4D772980C98500A86D37 /* MovieBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E4D732980C98500A86D37 /* MovieBasic.swift */; };
 		047E4D782980C98500A86D37 /* IMDbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E4D752980C98500A86D37 /* IMDbAPI.swift */; };
@@ -44,6 +45,7 @@
 		047C3A7D2982E52E001A20FD /* AppFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFile.swift; sourceTree = "<group>"; };
 		047C3A7F298349A1001A20FD /* MovieUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUserData.swift; sourceTree = "<group>"; };
 		047C3A81298447D9001A20FD /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		047DE3BD298C419800E624AA /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		047E4D722980C98500A86D37 /* MovieDetailed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailed.swift; sourceTree = "<group>"; };
 		047E4D732980C98500A86D37 /* MovieBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieBasic.swift; sourceTree = "<group>"; };
 		047E4D752980C98500A86D37 /* IMDbAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMDbAPI.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				047E4D792980C9D300A86D37 /* HInfoLabel.swift */,
 				048F0E2E298624EF00EB638B /* RatingStar.swift */,
 				048F0E2A2985D9F700EB638B /* RatingLabel.swift */,
+				047DE3BD298C419800E624AA /* RatingControl.swift */,
 				048F0E282985C2C700EB638B /* WebView.swift */,
 				048005CD297B294D00F75D5A /* MovieDetails.swift */,
 				047F7B5F29882F5E007A9F97 /* ActorListItem.swift */,
@@ -324,6 +327,7 @@
 				048F0E2B2985D9F700EB638B /* RatingLabel.swift in Sources */,
 				048005CC297B0F9300F75D5A /* MoviesList.swift in Sources */,
 				047E4D762980C98500A86D37 /* MovieDetailed.swift in Sources */,
+				047DE3BE298C419800E624AA /* RatingControl.swift in Sources */,
 				048005CE297B294E00F75D5A /* MovieDetails.swift in Sources */,
 				046B9B12298188800021DA84 /* MovieCategoriesButtonsV.swift in Sources */,
 				047F7B5E2986469E007A9F97 /* ActorsList.swift in Sources */,

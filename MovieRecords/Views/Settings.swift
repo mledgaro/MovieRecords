@@ -78,6 +78,7 @@ struct Settings: View {
 struct Settings_Previews: PreviewProvider {
     
     static var previews: some View {
-        Settings().environmentObject(TopMoviesVM())
+        Settings()
+            .environmentObject(TopMoviesVM())
     }
 }

@@ -6,20 +6,22 @@ struct RatingLabel: View {
     
     @AppStorage("mr-theme") private var colorTheme: ColorTheme = .clear
     
-    private var rating: String
+    @Binding var rating: Double
+    
     private let fullStars: Int
     private let emptyStars: Int
     private let halfStar: Bool
     
     
-    init(rating: String) {
+    init(_ rating: Binding<Double>) {
         
-        let intRating = Int(round(Float(rating) ?? 0.0))
+        self._rating = rating
         
-        self.rating = rating
+        let intRating = Int(round(rating.wrappedValue))
+        
         self.fullStars = intRating / 2
         self.halfStar = intRating % 2 == 1
-        self.emptyStars = 5 - self.fullStars - (self.halfStar ? 1 : 0)
+        self.emptyStars = (self.halfStar ? 4 : 5) - self.fullStars
     }
     
     
@@ -27,12 +29,6 @@ struct RatingLabel: View {
         
         HStack(alignment: .center) {
             
-            Text("Rating:")
-                .fontWeight(.bold)
-                .multilineTextAlignment(.trailing)
-                .frame(width: 120.0, alignment: .trailing)
-                .foregroundColor(colorTheme.highlight)
-                
             HStack(alignment: .center, spacing: 2.0) {
                 
                 ForEach(0..<fullStars, id: \.self) { _ in
@@ -48,7 +44,7 @@ struct RatingLabel: View {
                 }
             }
             
-            Text("(\(rating))")
+            Text("(\(String(format: "%.1f", rating)))")
                 .font(.footnote)
         }
         .foregroundColor(colorTheme.text)
@@ -56,8 +52,11 @@ struct RatingLabel: View {
     }
 }
 
+
 struct RatingLabel_Previews: PreviewProvider {
+    
     static var previews: some View {
-        RatingLabel(rating: "9.3")
+        
+        RatingLabel(.constant(7.3))
     }
 }
