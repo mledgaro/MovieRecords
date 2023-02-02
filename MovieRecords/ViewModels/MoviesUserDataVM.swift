@@ -8,10 +8,6 @@ class MoviesUserDataVM: ObservableObject {
     
     @Published var userData: [String : MovieUserData]
     
-    private var file: URL {
-        FileManagerVM.appDir.appendingPathComponent("user_data").appendingPathExtension(for: .json)
-    }
-    
     
     init() {
         
@@ -23,7 +19,7 @@ class MoviesUserDataVM: ObservableObject {
     
     func loadData() {
         
-        guard let data: [MovieUserData] = try! FileManagerVM.loadFile(self.file) else {
+        guard let data: [MovieUserData] = try! AppFile.userData().load() else {
             
             debugPrint("MoviesUserData file does not exist yet")
             return
@@ -35,7 +31,8 @@ class MoviesUserDataVM: ObservableObject {
     }
     
     func saveData() {
-        FileManagerVM.saveFile(data: Array(self.userData.values), file: self.file)
+        
+        AppFile.userData().save(Array(self.userData.values))
     }
     
     func getUserData(_ imdbId: String) -> MovieUserData {

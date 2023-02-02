@@ -26,15 +26,11 @@ class MovieDetailsVM: ObservableObject {
     }
     
     
-    private func file(_ imdbId: String) -> URL {
-        return FileManagerVM.cachesDir.appendingPathComponent(imdbId).appendingPathExtension(for: .json)
-    }
-    
     private func loadFile(_ imdbId: String) throws -> MovieDetailed {
         
         self.movies[imdbId] = MovieDetailed.EMPTY
         
-        guard let data: MovieDetailed = try FileManagerVM.loadFile(self.file(imdbId)) else {
+        guard let data: MovieDetailed = try AppFile.movieDetails(fileName: imdbId).load() else {
             
             self.requestData(imdbId)
             
@@ -55,18 +51,9 @@ class MovieDetailsVM: ObservableObject {
             if let _ = data {
                 
                 self.movies[imdbId] = data
-                self.saveFile(imdbId)
+                AppFile.movieDetails(fileName: imdbId).save(data)
             }
         }
-    }
-    
-    private func saveFile(_ imdbId: String) {
-        
-        guard let data = self.movies[imdbId] else {
-            return
-        }
-        
-        FileManagerVM.saveFile(data: data, file: self.file(imdbId))
     }
     
 }

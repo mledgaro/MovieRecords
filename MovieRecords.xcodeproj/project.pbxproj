@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		046B9B12298188800021DA84 /* MovieCategoriesButtonsV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B9B11298188800021DA84 /* MovieCategoriesButtonsV.swift */; };
-		047C3A7E2982E52E001A20FD /* FileManagerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C3A7D2982E52E001A20FD /* FileManagerVM.swift */; };
+		047C3A7E2982E52E001A20FD /* AppFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C3A7D2982E52E001A20FD /* AppFile.swift */; };
 		047C3A80298349A1001A20FD /* MovieUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C3A7F298349A1001A20FD /* MovieUserData.swift */; };
 		047C3A82298447D9001A20FD /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C3A81298447D9001A20FD /* Settings.swift */; };
 		047E4D762980C98500A86D37 /* MovieDetailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E4D722980C98500A86D37 /* MovieDetailed.swift */; };
@@ -41,7 +41,7 @@
 
 /* Begin PBXFileReference section */
 		046B9B11298188800021DA84 /* MovieCategoriesButtonsV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategoriesButtonsV.swift; sourceTree = "<group>"; };
-		047C3A7D2982E52E001A20FD /* FileManagerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerVM.swift; sourceTree = "<group>"; };
+		047C3A7D2982E52E001A20FD /* AppFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFile.swift; sourceTree = "<group>"; };
 		047C3A7F298349A1001A20FD /* MovieUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUserData.swift; sourceTree = "<group>"; };
 		047C3A81298447D9001A20FD /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		047E4D722980C98500A86D37 /* MovieDetailed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailed.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				047E4D752980C98500A86D37 /* IMDbAPI.swift */,
-				047C3A7D2982E52E001A20FD /* FileManagerVM.swift */,
+				047C3A7D2982E52E001A20FD /* AppFile.swift */,
 				047F7B6329884B83007A9F97 /* MoviesFilter.swift */,
 				048F0E2C2985DA2400EB638B /* ColorTheme.swift */,
 			);
@@ -328,7 +328,7 @@
 				046B9B12298188800021DA84 /* MovieCategoriesButtonsV.swift in Sources */,
 				047F7B5E2986469E007A9F97 /* ActorsList.swift in Sources */,
 				047F7B6429884B83007A9F97 /* MoviesFilter.swift in Sources */,
-				047C3A7E2982E52E001A20FD /* FileManagerVM.swift in Sources */,
+				047C3A7E2982E52E001A20FD /* AppFile.swift in Sources */,
 				047F7B6629887FCB007A9F97 /* Actor.swift in Sources */,
 				047C3A82298447D9001A20FD /* Settings.swift in Sources */,
 				047E4D782980C98500A86D37 /* IMDbAPI.swift in Sources */,

@@ -27,7 +27,11 @@ class IMDbAPI {
     
     static func topMovies(_ completitionHandler: @escaping ([MovieBasic]?) -> Void) {
         
+        debugPrint(IMDbAPI.topMoviesURLReq)
+        
         AF.request(IMDbAPI.topMoviesURLReq).responseDecodable(of: APIResponseArray.self) { response in
+            
+//            debugPrint(response)
             
             completitionHandler(response.value?.items)
         }
@@ -35,7 +39,11 @@ class IMDbAPI {
     
     static func movieDetails(_ imdbId: String, _ completitionHandler: @escaping (MovieDetailed?) -> Void) {
         
+        debugPrint(IMDbAPI.movieDetailsURLReq(imdbId))
+        
         AF.request(IMDbAPI.movieDetailsURLReq(imdbId)).responseDecodable(of: MovieDetailed.self) { response in
+            
+//            debugPrint(response)
             
             completitionHandler(response.value)
         }

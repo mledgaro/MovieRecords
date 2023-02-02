@@ -8,10 +8,6 @@ class TopMoviesVM: ObservableObject {
     
     @Published var movies: [MovieBasic]
     
-    private var file: URL {
-        FileManagerVM.cachesDir.appendingPathComponent("top_movies").appendingPathExtension(for: .json)
-    }
-    
     
     init() {
         
@@ -21,30 +17,21 @@ class TopMoviesVM: ObservableObject {
     }
     
     
-    private func loadFile() throws -> [MovieBasic]? {
-        return try FileManagerVM.loadFile(file)
-    }
-    
     private func requestData() {
         
         IMDbAPI.topMovies { data in
             
             if let _ = data {
                 self.movies = data!
-                self.saveData()
+                AppFile.topMovies().save(self.movies)
             }
         }
-    }
-    
-    private func saveData() {
-        
-        FileManagerVM.saveFile(data: self.movies, file: file)
     }
     
     
     func loadData() {
         
-        guard let data = try! loadFile() else {
+        guard let data: [MovieBasic] = try! AppFile.topMovies().load() else {
             requestData()
             return
         }

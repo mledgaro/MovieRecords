@@ -45,7 +45,7 @@ struct Settings: View {
                             
                             Button("Delete", role: .destructive) {
                                 print("delete")
-                                FileManagerVM.deleteCacheFiles()
+                                AppFile.deleteCacheFiles()
                                 topMoviesVM.loadData()
                             }
                         }
