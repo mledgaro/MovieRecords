@@ -43,7 +43,7 @@ struct MovieDetails: View {
                     Text(movie.year)
                         .font(.title3)
                     
-                    RatingControl()
+                    RatingControl(imdbId)
                     
                     AsyncImage(url: movie.imageUrl) { image in
                         image.resizable().scaledToFit()

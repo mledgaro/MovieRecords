@@ -25,10 +25,10 @@ enum AppFile {
         
         switch self {
             
-            case let .topMovies(fileName):
+            case let .topMovies(fileName), let .movieDetails(fileName):
                 return AppFile.cachesDir.appendingPathComponent(fileName).appendingPathExtension(for: .json)
             
-            case let .userData(fileName), let .movieDetails(fileName):
+            case let .userData(fileName):
                 return AppFile.appDir.appendingPathComponent(fileName).appendingPathExtension(for: .json)
         }
     }
