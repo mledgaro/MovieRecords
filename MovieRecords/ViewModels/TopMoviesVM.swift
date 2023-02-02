@@ -1,13 +1,6 @@
 //
 
 import Foundation
-import Alamofire
-
-
-fileprivate struct APIResponseArray: Codable {
-    var items: [MovieBasic]
-    var errorMessage: String
-}
 
 
 class TopMoviesVM: ObservableObject {
@@ -34,12 +27,10 @@ class TopMoviesVM: ObservableObject {
     
     private func requestData() {
         
-        AF.request(IMDbAPI.topMoviesURLReq).responseDecodable(of: APIResponseArray.self) { response in
+        IMDbAPI.topMovies { data in
             
-            if let dataResp = response.value {
-                
-                self.movies = dataResp.items
-                
+            if let _ = data {
+                self.movies = data!
                 self.saveData()
             }
         }

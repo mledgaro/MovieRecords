@@ -1,7 +1,6 @@
 //
 
 import Foundation
-import Alamofire
 
 
 class MovieDetailsVM: ObservableObject {
@@ -51,11 +50,11 @@ class MovieDetailsVM: ObservableObject {
         
         self.movies[imdbId] = MovieDetailed.EMPTY
         
-        AF.request(IMDbAPI.movieDetailsURLReq(imdbId)).responseDecodable(of: MovieDetailed.self) { response in
+        IMDbAPI.movieDetails(imdbId) { data in
             
-            if let dataResp = response.value {
+            if let _ = data {
                 
-                self.movies[imdbId] = dataResp
+                self.movies[imdbId] = data
                 self.saveFile(imdbId)
             }
         }

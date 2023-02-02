@@ -2,6 +2,7 @@
 
 import Foundation
 
+
 class MoviesUserDataVM: ObservableObject {
     
     
