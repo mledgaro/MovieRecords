@@ -41,4 +41,4 @@ Functions
 ![actors clear](/screenshots/settings-clear.png)
 
 ### Usage video
-[Watch video](https://drive.google.com/file/d/1Nef-wLbXYYonv15LaNSe3RhkcEUtXL1O/view?usp=sharing)
+[Watch video](https://drive.google.com/file/d/1bg5FjxA0wbkxVdT6kBWn8TIBcR93T_Zc/view?usp=sharing)
